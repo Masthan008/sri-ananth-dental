@@ -161,22 +161,76 @@ const About = () => {
         </section>
 
         {/* Category 1: Why Choose Us */}
-        <section className="py-20 bg-gradient-to-b from-blue-50 to-white">
+        <section className="py-20 bg-gradient-to-b from-blue-50 to-white overflow-hidden">
           <div className="max-w-6xl mx-auto px-4">
-            <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">Why Choose Us?</h2>
+            {/* Image above Why Choose Us */}
+            <div className="mb-16 rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl">
+              <img 
+                src="/images/about-features/Why Choose Us.jpg" 
+                alt="Why Choose Our Dental Clinic" 
+                className="w-full h-auto object-cover"
+                data-aos="fade-up"
+                data-aos-duration="800"
+              />
+            </div>
+            
+            <h2 
+              className="text-4xl font-bold text-center text-gray-900 mb-12"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              Why Choose Us?
+            </h2>
+            
             <div className="grid md:grid-cols-3 gap-8">
-              <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                <h4 className="text-xl font-bold text-blue-600 mb-3">State-of-the-Art Equipment</h4>
-                <p className="text-gray-700">We use state-of-the-art equipment and modern techniques to offer painless, precise, and effective treatments.</p>
-              </div>
-              <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                <h4 className="text-xl font-bold text-blue-600 mb-3">Personalized Treatment Plans</h4>
-                <p className="text-gray-700">Every smile is unique, and so is our approach. We customize treatments to meet your individual dental needs.</p>
-              </div>
-              <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                <h4 className="text-xl font-bold text-blue-600 mb-3">Comfort & Care</h4>
-                <p className="text-gray-700">Your comfort is our priority. Our clinic is designed to create a soothing, stress-free dental experience.</p>
-              </div>
+              {[
+                {
+                  title: "State-of-the-Art Equipment",
+                  description: "We use state-of-the-art equipment and modern techniques to offer painless, precise, and effective treatments.",
+                  icon: "⚙️"
+                },
+                {
+                  title: "Personalized Treatment Plans",
+                  description: "Every smile is unique, and so is our approach. We customize treatments to meet your individual dental needs.",
+                  icon: "🎯"
+                },
+                {
+                  title: "Comfort & Care",
+                  description: "Your comfort is our priority. Our clinic is designed to create a soothing, stress-free dental experience.",
+                  icon: "💆"
+                }
+              ].map((feature, index) => (
+                <div 
+                  key={feature.title}
+                  className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 feature-card"
+                  data-aos="fade-up"
+                  data-aos-delay={200 + (index * 100)}
+                >
+                  <div className="text-4xl mb-4">{feature.icon}</div>
+                  <h4 className="text-xl font-bold text-blue-600 mb-3">{feature.title}</h4>
+                  <p className="text-gray-700">{feature.description}</p>
+                </div>
+              ))}
+            </div>
+            
+            {/* Stats Section */}
+            <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6" data-aos="fade-up">
+              {[
+                { number: "5000+", label: "Happy Patients" },
+                { number: "15+", label: "Years Experience" },
+                { number: "98%", label: "Success Rate" },
+                { number: "24/7", label: "Emergency Care" }
+              ].map((stat, index) => (
+                <div 
+                  key={stat.label}
+                  className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow"
+                  data-aos="fade-up"
+                  data-aos-delay={300 + (index * 100)}
+                >
+                  <div className="text-3xl font-bold text-blue-600 mb-2">{stat.number}</div>
+                  <div className="text-gray-600 font-medium">{stat.label}</div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
