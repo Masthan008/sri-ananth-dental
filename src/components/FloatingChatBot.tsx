@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import { MessageCircle, X, Send } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-export const FloatingChatBot = () => {
+interface FloatingChatBotProps {
+  showServicesNav?: boolean;
+}
+
+export const FloatingChatBot = ({ showServicesNav }: FloatingChatBotProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Array<{ text: string; isUser: boolean }>>([
     { text: "Hello! How can I help you today?", isUser: false }
   ]);
   const [inputText, setInputText] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,7 +33,7 @@ export const FloatingChatBot = () => {
   };
 
   return (
-    <div className="fixed bottom-24 right-4 z-50">
+    <div>
       {/* Chat Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
@@ -39,6 +45,17 @@ export const FloatingChatBot = () => {
       {/* Chat Window */}
       {isOpen && (
         <div className="absolute bottom-16 right-0 w-80 bg-white rounded-lg shadow-xl border border-gray-200">
+          {/* Navigation to Services Page */}
+          {showServicesNav && (
+            <div className="p-4 border-b border-gray-200 flex justify-center">
+              <button
+                className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-semibold"
+                onClick={() => { setIsOpen(false); navigate('/services'); }}
+              >
+                Go to Services
+              </button>
+            </div>
+          )}
           <div className="p-4 bg-blue-500 text-white rounded-t-lg">
             <h3 className="font-semibold">Chat with Us</h3>
           </div>

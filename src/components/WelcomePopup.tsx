@@ -11,49 +11,47 @@ const WelcomePopup = () => {
   // Check if speech synthesis is supported
   const isSpeechSynthesisSupported = typeof window !== 'undefined' && 'speechSynthesis' in window;
 
-  // Play welcome message function
+  // Play welcome message function (wait for voices to load)
   const playWelcomeMessage = useCallback(() => {
     if (!isSpeechSynthesisSupported || isMuted) return;
-    
-    // Don't play if already played in this session
     if (sessionStorage.getItem('welcomeVoicePlayed') === 'true') return;
-    
     try {
-      const message = new SpeechSynthesisUtterance(
-        "Welcome to Sri Ananth Dental Hospital. We're delighted to have you here. How can we assist you with your dental care today?"
-      );
-      
-      message.lang = "en-IN";
-      message.rate = 0.95; // Slightly slower than normal
-      message.pitch = 1.1; // Slightly higher pitch for friendliness
-      
-      // Try to find an Indian English voice
-      const voices = window.speechSynthesis.getVoices();
-      const indianVoice = voices.find(voice => 
-        voice.lang === 'en-IN' || voice.name.includes('India')
-      );
-      
-      if (indianVoice) {
-        message.voice = indianVoice;
+      const speak = () => {
+        const message = new window.SpeechSynthesisUtterance(
+          "Welcome to Sri Ananth Dental Hospital. We're delighted to have you here. How can we assist you with your dental care today?"
+        );
+        message.lang = "en-IN";
+        message.rate = 0.95;
+        message.pitch = 1.1;
+        const voices = window.speechSynthesis.getVoices();
+        const indianVoice = voices.find(voice => voice.lang === 'en-IN' || voice.name.includes('India'));
+        if (indianVoice) {
+          message.voice = indianVoice;
+        } else {
+          const englishVoice = voices.find(voice => voice.lang.startsWith('en'));
+          if (englishVoice) message.voice = englishVoice;
+        }
+        message.onstart = () => setIsSpeaking(true);
+        message.onend = () => {
+          setIsSpeaking(false);
+          sessionStorage.setItem('welcomeVoicePlayed', 'true');
+        };
+        message.onerror = (event) => {
+          console.error('SpeechSynthesis error:', event);
+          setVoiceSupported(false);
+          setIsSpeaking(false);
+        };
+        window.speechSynthesis.speak(message);
+      };
+      // If voices are not loaded, wait for them
+      if (window.speechSynthesis.getVoices().length === 0) {
+        window.speechSynthesis.onvoiceschanged = () => {
+          speak();
+          window.speechSynthesis.onvoiceschanged = null;
+        };
       } else {
-        // Fallback to any English voice
-        const englishVoice = voices.find(voice => voice.lang.startsWith('en'));
-        if (englishVoice) message.voice = englishVoice;
+        speak();
       }
-      
-      // Event handlers
-      message.onstart = () => setIsSpeaking(true);
-      message.onend = () => {
-        setIsSpeaking(false);
-        sessionStorage.setItem('welcomeVoicePlayed', 'true');
-      };
-      message.onerror = (event) => {
-        console.error('SpeechSynthesis error:', event);
-        setVoiceSupported(false);
-        setIsSpeaking(false);
-      };
-      
-      window.speechSynthesis.speak(message);
     } catch (error) {
       console.error('Error with speech synthesis:', error);
       setVoiceSupported(false);
@@ -86,32 +84,34 @@ const WelcomePopup = () => {
       setIsMuted(true);
     }
 
-    // Check if this is the first visit
-    const isFirstVisit = !sessionStorage.getItem('hasVisitedBefore');
-    
+    // Only show popup and play voice if not already shown this session
+    const hasShownPopup = sessionStorage.getItem('welcomePopupShown') === 'true';
+    if (hasShownPopup) {
+      setShow(false);
+      return;
+    }
+
     // Show popup after a short delay
     const showTimer = setTimeout(() => {
       setShow(true);
-      
-      // Play welcome message if not muted and first visit
-      if (!isMuted && isFirstVisit) {
+      sessionStorage.setItem('welcomePopupShown', 'true');
+      // Play welcome message if not muted and not already played
+      if (!isMuted && sessionStorage.getItem('welcomeVoicePlayed') !== 'true') {
         playWelcomeMessage();
-        sessionStorage.setItem('hasVisitedBefore', 'true');
       }
-    }, 2000); // Slightly longer delay to ensure page is fully loaded
+    }, 2000);
 
-    // Auto-hide after 8 seconds if not hovered
+    // Auto-hide after 10 seconds if not hovered
     const hideTimer = setTimeout(() => {
       if (!isHovered) {
         setShow(false);
       }
-    }, 10000); // 10 seconds
+    }, 10000);
 
     // Cleanup
     return () => {
       clearTimeout(showTimer);
       clearTimeout(hideTimer);
-      // Cancel any ongoing speech when component unmounts
       if (window.speechSynthesis) {
         window.speechSynthesis.cancel();
       }

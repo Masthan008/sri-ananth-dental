@@ -65,13 +65,9 @@ const Index = () => {
       </section>
       <Footer />
       <FloatingCTA />
-      {/* Floating ChatBot on left */}
-      <div className="fixed bottom-24 left-4 z-50">
-        <FloatingChatBot key="left" />
-      </div>
-      {/* Floating ChatBot on right */}
-      <div className="fixed bottom-24 right-4 z-50">
-        <FloatingChatBot key="right" />
+      {/* Floating ChatBot at bottom center with navigation */}
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50">
+        <FloatingChatBot showServicesNav />
       </div>
       {/* Welcome Popup */}
       <WelcomePopup />
