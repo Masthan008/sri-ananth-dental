@@ -40,15 +40,7 @@ const About = () => {
   const { t } = useTranslation();
   useEffect(() => { AOS.init({ once: true }); }, []);
   // Animation state for feature cards
-  const [featureActive, setFeatureActive] = useState([false, false, false]);
-  const [fourActive, setFourActive] = useState([false, false, false, false]);
-
-  const handleFeatureClick = idx => {
-    setFeatureActive(arr => arr.map((v, i) => i === idx ? !v : v));
-  };
-  const handleFourClick = idx => {
-    setFourActive(arr => arr.map((v, i) => i === idx ? !v : v));
-  };
+  // Remove click animation state, use scroll-triggered grayscale/color
 
   return (
     <div className="min-h-screen bg-white">
@@ -115,12 +107,11 @@ const About = () => {
               ].map((item, idx) => (
                 <div
                   key={item.title}
-                  className={`relative rounded-2xl shadow-lg p-6 h-[340px] flex flex-col justify-end items-center overflow-hidden cursor-pointer transition-all duration-500 ${featureActive[idx] ? 'grayscale-0 brightness-50' : 'grayscale-0 brightness-100'}`}
+                  className="relative rounded-2xl shadow-lg p-6 h-[340px] flex flex-col justify-end items-center overflow-hidden transition-all duration-700 grayscale hover:grayscale-0"
                   data-aos={idx === 0 ? "zoom-in-up" : idx === 1 ? "flip-left" : "zoom-in-down"}
                   data-aos-delay={idx * 100}
-                  onClick={() => handleFeatureClick(idx)}
                 >
-                  <img src={item.img} alt={item.title} className={`absolute inset-0 w-full h-full object-cover opacity-40 transition-all duration-500 ${featureActive[idx] ? 'grayscale brightness-50' : ''}`} />
+                  <img src={item.img} alt={item.title} className="absolute inset-0 w-full h-full object-cover opacity-40 transition-all duration-700" />
                   <div className="relative z-10 flex flex-col items-center">
                     <h3 className="text-xl font-extrabold text-gray-900 mb-2 bg-white/80 px-3 py-1 rounded">{item.title}</h3>
                     <p className="text-base text-gray-800 font-medium mt-2 bg-white/70 px-3 py-2 rounded">{item.desc}</p>
@@ -167,12 +158,11 @@ const About = () => {
                 ].map((item, idx) => (
                   <li
                     key={item.title}
-                    className={`relative rounded-2xl shadow-lg p-8 h-[340px] flex flex-col justify-end items-center overflow-hidden cursor-pointer transition-all duration-500 ${fourActive[idx] ? 'grayscale-0 brightness-50' : 'grayscale-0 brightness-100'}`}
+                    className="relative rounded-2xl shadow-lg p-8 h-[340px] flex flex-col justify-end items-center overflow-hidden transition-all duration-700 grayscale hover:grayscale-0"
                     data-aos={idx === 0 ? "zoom-in-up" : idx === 1 ? "flip-left" : idx === 2 ? "zoom-in-down" : "flip-right"}
                     data-aos-delay={idx * 100}
-                    onClick={() => handleFourClick(idx)}
                   >
-                    <img src={item.img} alt={item.title} className={`absolute inset-0 w-full h-full object-cover opacity-40 transition-all duration-500 ${fourActive[idx] ? 'grayscale brightness-50' : ''}`} />
+                    <img src={item.img} alt={item.title} className="absolute inset-0 w-full h-full object-cover opacity-40 transition-all duration-700" />
                     <div className="relative z-10 flex flex-col items-center">
                       <strong className="block text-xl text-blue-900 mb-2 bg-white/80 px-3 py-1 rounded">{item.title}</strong>
                       <span className="text-base text-gray-800 font-medium mt-2 bg-white/70 px-3 py-2 rounded">{item.desc}</span>
