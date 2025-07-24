@@ -2,7 +2,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Star, Briefcase } from 'lucide-react';
+import { Star, Briefcase, Phone } from 'lucide-react';
 import { FloatingCTA } from '@/components/FloatingCTA';
 import { HeroSection } from '@/components/HeroSection';
 import { useTranslation } from 'react-i18next';
@@ -111,122 +111,35 @@ const Team = () => {
           </div>
         </section>
       </main>
-      <Footer />
-      <FloatingCTA />
-    </div>
-                      </div>
-                      
-                      <div className="space-y-4">
-                        <div>
-                          <h4 className="font-medium text-gray-900 flex items-center">
-                            <GraduationCap className="w-4 h-4 mr-2 text-blue-600" />
-                            Education & Qualifications
-                          </h4>
-                          <div className="mt-2 space-y-1.5">
-                            {doctor.qualifications ? (
-                              doctor.qualifications.map((qualification, idx) => (
-                                <div key={idx} className="flex items-start">
-                                  <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
-                                  <span className="text-gray-600 text-sm">{qualification}</span>
-                                </div>
-                              ))
-                            ) : (
-                              <p className="text-gray-600 text-sm ml-6">{doctor.education}</p>
-                            )}
-                          </div>
-                        </div>
-                        
-                        <div className="pt-2">
-                          <h4 className="font-medium text-gray-900 mb-2">Specialties</h4>
-                          <div className="flex flex-wrap gap-2">
-                            {doctor.specialties.map((specialty, idx) => (
-                              <Badge 
-                                key={idx} 
-                                variant="secondary" 
-                                className="bg-blue-50 text-blue-700 hover:bg-blue-50 text-xs px-2.5 py-1"
-                              >
-                                {specialty}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                        
-                        {doctor.achievements && doctor.achievements.length > 0 && (
-                          <div className="pt-2">
-                            <h4 className="font-medium text-gray-900 mb-2 flex items-center">
-                              <Award className="w-4 h-4 mr-2 text-blue-600" />
-                              Achievements
-                            </h4>
-                            <div className="space-y-2">
-                              {doctor.achievements.map((achievement, idx) => (
-                                <div key={idx} className="flex items-start">
-                                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 mr-2"></span>
-                                  <span className="text-sm text-gray-600">{achievement}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    <CardFooter className="border-t p-4">
-                      <Button 
-                        className="w-full bg-blue-600 hover:bg-blue-700"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          navigate(`/booking?doctorId=${doctor.id}`);
-                        }}
-                      >
-                        <Calendar className="w-4 h-4 mr-2" />
-                        Book Appointment with {doctor.name.split(' ')[0]}
-                      </Button>
-                    </CardFooter>
-                  </CardContent>
-                  </Card>
-                </div>
-              ))}
-            </div>
+      
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-b from-blue-50 to-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl font-bold text-gray-900 mb-6">
+            Ready to Meet Our Team?
+          </h2>
+          <p className="text-xl text-gray-600 mb-8">
+            Schedule an appointment with one of our expert dentists today and take the first step towards a healthier smile.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Button 
+              className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-lg transition-colors duration-300"
+              onClick={() => navigate('/booking')}
+            >
+              Book an Appointment
+            </Button>
+            <Button 
+              variant="outline"
+              className="border-blue-600 text-blue-600 hover:bg-blue-50"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              <Phone className="w-5 h-5 mr-2" />
+              Contact Us
+            </Button>
           </div>
-        </section>
-
-        // ...existing code...
-
-        {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-b from-blue-50 to-white">
-          <div 
-            className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              {t('team.readyToMeet', 'Ready to Meet Our Team?')}
-            </h2>
-            <p className="text-xl text-gray-600 mb-8">
-              {t('team.ctaDescription', 'Schedule your consultation today and experience the difference our caring team can make.')}
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button 
-                size="lg" 
-                className="bg-blue-600 hover:bg-blue-700 text-white"
-                onClick={() => navigate('/booking')}
-              >
-                <Calendar className="w-5 h-5 mr-2" />
-                {t('team.bookAppointment', 'Book an Appointment')}
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg"
-                className="border-blue-600 text-blue-600 hover:bg-blue-50"
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                <Phone className="w-5 h-5 mr-2" />
-                {t('contact.contactUs', 'Contact Us')}
-              </Button>
-            </div>
-          </div>
-        </section>
-      </main>
-
+        </div>
+      </section>
+      
       <Footer />
       <FloatingCTA />
     </div>

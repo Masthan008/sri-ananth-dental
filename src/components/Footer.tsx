@@ -22,7 +22,7 @@ export const Footer = () => {
     { name: "Appointments", href: "/appointments" },
     { name: "Testimonials", href: "/testimonials" },
     { name: "Gallery", href: "/gallery" },
-    { name: "FAQs", href: "/faqs" },
+    { name: "FAQs", href: "/faq" },
     { name: "Insurance", href: "/insurance" },
     { name: "Careers", href: "/careers" }
   ];

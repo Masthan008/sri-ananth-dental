@@ -4,7 +4,7 @@ import { FloatingCTA } from "@/components/FloatingCTA";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, Clock } from "lucide-react";
+import { CheckCircle, Clock, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { HeroSection } from "@/components/HeroSection";
 import { useTranslation } from 'react-i18next';
@@ -13,8 +13,6 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -29,141 +27,275 @@ const Services = () => {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const iconsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  // Initialize AOS
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      easing: 'ease-in-out',
-      once: true,
-      mirror: false,
-      offset: 100
-    });
-  }, []);
-
-  // GSAP Animations
+  // GSAP Animations with ScrollTrigger
   useGSAP(() => {
-    // Typewriter effect for heading
-    if (headingRef.current) {
-      const text = headingRef.current.textContent || '';
-      headingRef.current.textContent = '';
-      
-      gsap.fromTo(headingRef.current,
-        { opacity: 0, y: 20 },
+    // Section reveal animation with ScrollTrigger
+    if (sectionRef.current) {
+      gsap.fromTo(sectionRef.current,
         { 
-          opacity: 1, 
-          y: 0, 
-          duration: 0.8,
+          y: 100,
+          opacity: 0,
+          clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)'
+        },
+        { 
+          y: 0,
+          opacity: 1,
+          clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)',
+          duration: 1.2,
+          ease: "power3.out",
           scrollTrigger: {
-            trigger: headingRef.current,
-            start: 'top 80%',
-            toggleActions: 'play none none none'
+            trigger: sectionRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none"
+          },
+          onComplete: () => {
+            // Enable hover effects after initial animation
+            cardsRef.current.forEach(card => {
+              if (card) {
+                card.style.pointerEvents = 'auto';
+              }
+            });
           }
         }
       );
+    }
+
+    // Heading animation with typewriter effect
+    if (headingRef.current) {
+      const headingText = headingRef.current.textContent || '';
+      headingRef.current.textContent = '';
       
-      // Animate text reveal
-      const chars = text.split('');
-      headingRef.current.textContent = ''; // Clear the text
+      // Create character spans for the heading
+      const chars = headingText.split('');
+      let charIndex = 0;
+      let isTyping = false;
       
-      chars.forEach((char, i) => {
-        const charSpan = document.createElement('span');
-        charSpan.textContent = char;
-        charSpan.style.opacity = '0';
-        charSpan.style.display = 'inline-block';
-        headingRef.current?.appendChild(charSpan);
+      // Function to start typing effect when heading is in view
+      const startTyping = () => {
+        if (isTyping) return;
+        isTyping = true;
         
-        gsap.to(charSpan, {
-          opacity: 1,
-          y: 0,
-          duration: 0.1,
-          delay: i * 0.03,
-          ease: 'power2.out'
-        });
+        const typeNextChar = () => {
+          if (charIndex < chars.length) {
+            const charSpan = document.createElement('span');
+            charSpan.textContent = chars[charIndex];
+            charSpan.style.display = 'inline-block';
+            charSpan.style.opacity = '0';
+            charSpan.style.transform = 'translateY(20px)';
+            headingRef.current?.appendChild(charSpan);
+            
+            // Animate each character with a slight delay
+            gsap.to(charSpan, {
+              opacity: 1,
+              y: 0,
+              duration: 0.3,
+              ease: 'power2.out',
+              delay: charIndex * 0.03,
+              onComplete: () => {
+                // Add a subtle color animation on completion
+                if (charIndex % 3 === 0) {
+                  gsap.to(charSpan, {
+                    color: '#3b82f6',
+                    duration: 0.2,
+                    yoyo: true,
+                    repeat: 1,
+                    ease: 'power1.inOut'
+                  });
+                }
+              }
+            });
+            
+            charIndex++;
+            requestAnimationFrame(typeNextChar);
+          } else {
+            // Add a subtle pulse effect when typing is complete
+            gsap.to(headingRef.current, {
+              scale: 1.02,
+              duration: 0.3,
+              yoyo: true,
+              repeat: 1,
+              ease: 'power1.inOut'
+            });
+          }
+        };
+        
+        typeNextChar();
+      };
+      
+      // Set up scroll trigger for heading
+      gsap.to(headingRef.current, {
+        scrollTrigger: {
+          trigger: headingRef.current,
+          start: 'top 80%',
+          onEnter: startTyping,
+          once: true
+        }
       });
     }
     
-    // Animate service cards with staggered effect
+    // Animate service cards with staggered effect and 3D tilt
     cardsRef.current.forEach((card, i) => {
       if (!card) return;
       
-      gsap.fromTo(card,
-        { 
-          opacity: 0,
-          y: 50,
-          scale: 0.95
-        },
-        { 
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.6,
-          delay: i * 0.1,
-          ease: 'back.out(1.4)',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 85%',
-            toggleActions: 'play none none none'
-          },
-          onComplete: () => {
-            // Add hover effect after initial animation
-            card.addEventListener('mouseenter', () => {
-              gsap.to(card, {
-                y: -10,
-                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-                duration: 0.3,
-                ease: 'power2.out'
-              });
-            });
-            
-            card.addEventListener('mouseleave', () => {
-              gsap.to(card, {
-                y: 0,
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-                duration: 0.3,
-                ease: 'power2.out'
-              });
-            });
+      // Disable hover effects during initial animation
+      card.style.pointerEvents = 'none';
+      
+      // Initial state
+      gsap.set(card, {
+        opacity: 0,
+        y: 80,
+        rotationX: 10,
+        transformPerspective: 1000,
+        transformOrigin: 'center center',
+        boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)'
+      });
+      
+      // Animate in with 3D effect
+      gsap.to(card, {
+        opacity: 1,
+        y: 0,
+        rotationX: 0,
+        duration: 0.8,
+        delay: i * 0.1,
+        ease: 'back.out(1.7)',
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+          onEnter: () => {
+            // Enable hover effects when card enters viewport
+            card.style.pointerEvents = 'auto';
           }
+        },
+        onComplete: () => {
+          // Add 3D tilt effect on hover
+          const handleMouseMove = (e: MouseEvent) => {
+            if (!card) return;
+            
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = ((y - centerY) / centerY) * 5;
+            const rotateY = ((centerX - x) / centerX) * 5;
+            
+            gsap.to(card, {
+              rotationX: rotateX,
+              rotationY: rotateY,
+              scale: 1.02,
+              duration: 0.5,
+              ease: 'power1.out',
+              transformPerspective: 1000,
+              transformOrigin: 'center center',
+              boxShadow: '0 20px 50px -10px rgba(0, 0, 0, 0.2)'
+            });
+          };
+          
+          const handleMouseLeave = () => {
+            gsap.to(card, {
+              rotationX: 0,
+              rotationY: 0,
+              scale: 1,
+              duration: 0.5,
+              ease: 'elastic.out(1, 0.5)',
+              boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)'
+            });
+          };
+          
+          card.addEventListener('mousemove', handleMouseMove as any);
+          card.addEventListener('mouseleave', handleMouseLeave);
+          
+          // Cleanup function
+          return () => {
+            card.removeEventListener('mousemove', handleMouseMove as any);
+            card.removeEventListener('mouseleave', handleMouseLeave);
+          };
         }
-      );
+      });
     });
     
-    // Animate icons with bounce effect
+    // Animate icons with bounce and pulse effect
     iconsRef.current.forEach((icon, i) => {
       if (!icon) return;
       
-      gsap.fromTo(icon,
-        { 
-          scale: 0,
-          rotation: -180,
-          opacity: 0
-        },
-        { 
-          scale: 1,
-          rotation: 0,
-          opacity: 1,
-          duration: 0.8,
-          delay: 0.2 + (i * 0.1),
-          ease: 'elastic.out(1, 0.5)',
-          scrollTrigger: {
-            trigger: icon,
-            start: 'top 90%',
-            toggleActions: 'play none none none'
-          }
-        }
-      );
+      // Initial state
+      gsap.set(icon, {
+        scale: 0,
+        rotation: -180,
+        opacity: 0,
+        transformOrigin: 'center center',
+        filter: 'drop-shadow(0 0 0px rgba(255,255,255,0))'
+      });
       
-      // Add hover effect for icons
-      icon.addEventListener('mouseenter', () => {
-        gsap.to(icon, {
-          scale: 1.2,
-          rotation: 10,
-          duration: 0.3,
-          yoyo: true,
-          repeat: 1,
-          ease: 'power2.inOut'
-        });
+      // Animate in with bounce and glow
+      gsap.to(icon, {
+        scale: 1,
+        rotation: 0,
+        opacity: 1,
+        duration: 0.8,
+        delay: 0.2 + (i * 0.1),
+        ease: 'elastic.out(1, 0.7)',
+        scrollTrigger: {
+          trigger: icon,
+          start: 'top 90%',
+          toggleActions: 'play none none none'
+        },
+        onComplete: () => {
+          // Add continuous subtle pulse
+          gsap.to(icon, {
+            scale: 1.05,
+            duration: 1.5,
+            yoyo: true,
+            repeat: -1,
+            ease: 'sine.inOut',
+            repeatDelay: 0.5
+          });
+          
+          // Add hover effect
+          icon.addEventListener('mouseenter', () => {
+            // Kill any existing animations
+            gsap.killTweensOf(icon);
+            
+            // Bounce effect
+            gsap.to(icon, {
+              scale: 1.3,
+              rotation: 360,
+              duration: 0.5,
+              ease: 'elastic.out(1, 0.5)',
+              onComplete: () => {
+                // Restore pulse animation after hover
+                gsap.to(icon, {
+                  scale: 1.05,
+                  duration: 1.5,
+                  yoyo: true,
+                  repeat: -1,
+                  ease: 'sine.inOut',
+                  repeatDelay: 0.5
+                });
+              }
+            });
+            
+            // Glow effect
+            gsap.to(icon, {
+              filter: 'drop-shadow(0 0 15px rgba(255,255,255,0.8))',
+              duration: 0.3,
+              ease: 'power2.out'
+            });
+          });
+          
+          icon.addEventListener('mouseleave', () => {
+            gsap.to(icon, {
+              filter: 'drop-shadow(0 0 0px rgba(255,255,255,0))',
+              duration: 0.5,
+              ease: 'power2.inOut'
+            });
+          });
+        }
       });
     });
     
