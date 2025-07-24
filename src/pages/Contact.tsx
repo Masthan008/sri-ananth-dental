@@ -48,7 +48,7 @@ const Contact = () => {
       title: "Office Location",
       details: [
         { label: "Clinic", value: "Sri Ananth Dental Hospital" },
-        { label: "Address", value: "Opposite RTC Complex, Main Road" },
+        { label: "Address", value: "Indira bai colony road, Alampally" },
         { label: "City", value: "Vikarabad, Telangana 501101" }
       ],
       color: "from-blue-500 to-cyan-500"
@@ -57,8 +57,7 @@ const Contact = () => {
       icon: Clock,
       title: "Office Hours",
       details: [
-        { label: "Monday - Saturday", value: "9:00 AM - 8:00 PM" },
-        { label: "Sunday", value: "9:00 AM - 1:00 PM" },
+        { label: "Monday - Sunday", value: "8:00 AM - 9:00 PM" },
         { label: "Emergency", value: "Available 24/7" }
       ],
       color: "from-purple-500 to-pink-500"
@@ -79,7 +78,7 @@ const Contact = () => {
     {
       icon: Car,
       title: "By Car",
-      description: "Ample parking space available near the clinic. Located opposite RTC Complex.",
+      description: "Ample parking space available near the clinic. Located in Indira Bai Colony.",
       details: ["Parking available nearby", "Wheelchair accessible", "Easy access from main road"]
     },
     {
@@ -92,7 +91,7 @@ const Contact = () => {
       icon: Navigation,
       title: "Navigation",
       description: "Use GPS coordinates: 17.3380° N, 78.4820° E for precise location.",
-      details: ["Landmark: Opposite RTC Complex", "Main Road, Vikarabad", "Near government offices"]
+      details: ["Indira Bai Colony Road", "Alampally, Vikarabad", "Near government offices"]
     }
   ];
 
@@ -158,7 +157,7 @@ const Contact = () => {
             data-aos-delay="100"
           >
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.123456789012!2d78.4820!3d17.3380!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb8d4f1a1a1a1b%3A0x1a1a1a1a1a1a1a1a!2sSri%20Ananth%20Dental%20Hospital!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3808.765432109375!2d77.9125!3d17.3364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb8d4f1a1a1a1b%3A0x1a1a1a1a1a1a1a1a!2sIndira%20Bai%20Colony%20Road%2C%20Alampally%2C%20Vikarabad%2C%20Telangana%20501101!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" 
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 

@@ -82,12 +82,12 @@ export const Header = () => {
             </span>
             <span className="flex items-center">
               <Clock className="h-3 w-3 md:h-4 md:w-4 mr-1" />
-              Mon-Sat: 9AM-8PM, Sun: 9AM-1PM
+              Mon-Sun: 8AM-9PM
             </span>
           </div>
           <div className="hidden md:flex items-center">
             <MapPin className="h-3 w-3 md:h-4 md:w-4 mr-1" />
-            Opposite RTC Complex, Main Road, Vikarabad, Telangana 501101
+            Indira bai colony road, Alampally, Vikarabad, Telangana 501101
           </div>
         </div>
       </div>

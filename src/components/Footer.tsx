@@ -137,7 +137,7 @@ export const Footer = () => {
                 <MapPin className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
                 <div className="text-sm text-gray-300">
                   <p>Sri Ananth Dental Hospital</p>
-                  <p>Opposite RTC Complex, Main Road</p>
+                  <p>Indira bai colony road, Alampally</p>
                   <p>Vikarabad, Telangana 501101</p>
                 </div>
               </div>
@@ -156,8 +156,7 @@ export const Footer = () => {
               <div className="flex items-start space-x-3">
                 <Clock className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
                 <div className="text-sm text-gray-300">
-                  <p>Monday - Saturday: 9:00 AM - 8:00 PM</p>
-                  <p>Sunday: 9:00 AM - 1:00 PM</p>
+                  <p>Monday - Sunday: 8:00 AM - 9:00 PM</p>
                 </div>
               </div>
             </div>

@@ -162,31 +162,21 @@ const About = () => {
 
         {/* Category 1: Why Choose Us */}
         <section className="py-20 bg-gradient-to-b from-blue-50 to-white">
-          <div className="max-w-6xl mx-auto px-4 flex flex-col lg:flex-row items-center gap-12">
-            <div className="flex-1 space-y-6">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Why Choose Us?</h2>
-              <div className="space-y-4">
-                <div>
-                  <h4 className="text-xl font-bold text-blue-600 mb-1">State-of-the-Art Equipment</h4>
-                  <p className="text-gray-700">We use state-of-the-art equipment and modern techniques to offer painless, precise, and effective treatments.</p>
-                </div>
-                <div>
-                  <h4 className="text-xl font-bold text-blue-600 mb-1">Personalized Treatment Plans</h4>
-                  <p className="text-gray-700">Every smile is unique, and so is our approach. We customize treatments to meet your individual dental needs.</p>
-                </div>
-                <div>
-                  <h4 className="text-xl font-bold text-blue-600 mb-1">Comfort & Care</h4>
-                  <p className="text-gray-700">Your comfort is our priority. Our clinic is designed to create a soothing, stress-free dental experience.</p>
-                </div>
+          <div className="max-w-6xl mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">Why Choose Us?</h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                <h4 className="text-xl font-bold text-blue-600 mb-3">State-of-the-Art Equipment</h4>
+                <p className="text-gray-700">We use state-of-the-art equipment and modern techniques to offer painless, precise, and effective treatments.</p>
               </div>
-            </div>
-            <div className="flex-1 flex justify-center">
-              <img
-                src="/images/hero/dental-chair-and-equipment-patie.jpg"
-                alt="Dental Clinic Modern Equipment"
-                className="animate-img rounded-2xl shadow-xl w-full max-w-md object-cover border-4 border-blue-200 transform transition-transform duration-300 will-change-transform"
-                loading="lazy"
-              />
+              <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                <h4 className="text-xl font-bold text-blue-600 mb-3">Personalized Treatment Plans</h4>
+                <p className="text-gray-700">Every smile is unique, and so is our approach. We customize treatments to meet your individual dental needs.</p>
+              </div>
+              <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                <h4 className="text-xl font-bold text-blue-600 mb-3">Comfort & Care</h4>
+                <p className="text-gray-700">Your comfort is our priority. Our clinic is designed to create a soothing, stress-free dental experience.</p>
+              </div>
             </div>
           </div>
         </section>
@@ -309,10 +299,9 @@ const About = () => {
         {/* Mission & Vision */}
         <section className="py-20 bg-gradient-to-b from-blue-50 to-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-16">
-              {/* Mission Card with background image and reduced transparency */}
-              <div className="relative rounded-3xl overflow-hidden shadow-xl min-h-[400px] flex flex-col justify-end bg-blue-700" data-aos="fade-up" data-aos-delay="0">
-                <img src="/images/about-features/mission.png" alt="Our Mission" className="animate-img absolute inset-0 w-full h-full object-cover opacity-50" />
+            <div className="grid lg:grid-cols-2 gap-8">
+              {/* Mission Card with consistent styling */}
+              <div className="relative rounded-3xl overflow-hidden shadow-xl min-h-[350px] flex flex-col justify-end bg-gradient-to-br from-blue-700 to-blue-800" data-aos="fade-up" data-aos-delay="0">
                 <div className="relative z-10 p-10 flex flex-col items-center">
                   <h3 className="text-3xl font-extrabold mb-4 text-white drop-shadow-lg">Our Mission</h3>
                   <p className="text-lg text-blue-100 leading-relaxed text-center font-medium drop-shadow-md feature-section">
@@ -320,12 +309,11 @@ const About = () => {
                   </p>
                 </div>
               </div>
-              {/* Vision Card with background image and reduced transparency */}
-              <div className="relative rounded-3xl overflow-hidden shadow-xl min-h-[400px] flex flex-col justify-end bg-cyan-700" data-aos="fade-up" data-aos-delay="100">
-                <img src="/images/about-features/vision.png" alt="Our Vision" className="absolute inset-0 w-full h-full object-cover opacity-50" />
+              {/* Vision Card with consistent styling */}
+              <div className="relative rounded-3xl overflow-hidden shadow-xl min-h-[350px] flex flex-col justify-end bg-gradient-to-br from-blue-700 to-blue-800" data-aos="fade-up" data-aos-delay="100">
                 <div className="relative z-10 p-10 flex flex-col items-center">
                   <h3 className="text-3xl font-extrabold mb-4 text-white drop-shadow-lg">Our Vision</h3>
-                  <p className="text-lg text-cyan-100 leading-relaxed text-center font-medium drop-shadow-md feature-section">
+                  <p className="text-lg text-blue-100 leading-relaxed text-center font-medium drop-shadow-md feature-section">
                     To be the leading dental practice in our community, known for excellence in patient care, advanced technology, and creating lasting relationships built on trust and outstanding results.
                   </p>
                 </div>
