@@ -85,21 +85,21 @@ const About = () => {
         <section className="py-20 bg-white">
           <div className="max-w-6xl mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center mb-12">
-              <div className="relative rounded-2xl shadow-lg p-6 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="fade-up" data-aos-delay="0">
+              <div className="relative rounded-2xl shadow-lg p-6 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="zoom-in-up" data-aos-delay="0">
                 <img src="/images/about-features/Dental Checkup.png" alt="Dental Checkup" className="absolute inset-0 w-full h-full object-cover opacity-40" />
                 <div className="relative z-10 flex flex-col items-center">
                   <h3 className="text-xl font-extrabold text-gray-900 mb-2 bg-white/80 px-3 py-1 rounded">Dental Checkup</h3>
                   <p className="text-base text-gray-800 font-medium mt-2 bg-white/70 px-3 py-2 rounded">We proudly conduct free dental checkup camps every year for children and adults to serve the people who cannot afford regular checkups.</p>
                 </div>
               </div>
-              <div className="relative rounded-2xl shadow-lg p-6 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+              <div className="relative rounded-2xl shadow-lg p-6 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="flip-left" data-aos-delay="100">
                 <img src="/images/about-features/Qualified Doctors.png" alt="Qualified Doctors" className="absolute inset-0 w-full h-full object-cover opacity-40" />
                 <div className="relative z-10 flex flex-col items-center">
                   <h3 className="text-xl font-extrabold text-gray-900 mb-2 bg-white/80 px-3 py-1 rounded">Qualified Doctors</h3>
                   <p className="text-base text-gray-800 font-medium mt-2 bg-white/70 px-3 py-2 rounded">We have a team of experienced and best dentist in Hyderabad who works with full dedication to serve our patients better.</p>
                 </div>
               </div>
-              <div className="relative rounded-2xl shadow-lg p-6 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+              <div className="relative rounded-2xl shadow-lg p-6 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="zoom-in-down" data-aos-delay="200">
                 <img src="/images/about-features/Emergency Services.png" alt="Emergency Services" className="absolute inset-0 w-full h-full object-cover opacity-40" />
                 <div className="relative z-10 flex flex-col items-center">
                   <h3 className="text-xl font-extrabold text-gray-900 mb-2 bg-white/80 px-3 py-1 rounded">Emergency Services</h3>
@@ -122,28 +122,28 @@ const About = () => {
                 In dental and oral surgery, lighting in the operating theatre plays a crucial role in ensuring optimal visibility and precision during procedures. Here are some key considerations regarding lighting in a dental operating theatre:
               </p>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-10">
-                <li className="relative rounded-2xl shadow-lg p-8 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="fade-up" data-aos-delay="0">
+                <li className="relative rounded-2xl shadow-lg p-8 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="zoom-in-up" data-aos-delay="0">
                   <img src="/images/about-features/Sterile Environment.png" alt="Sterile Environment" className="absolute inset-0 w-full h-full object-cover opacity-40" />
                   <div className="relative z-10 flex flex-col items-center">
                     <strong className="block text-xl text-blue-900 mb-2 bg-white/80 px-3 py-1 rounded">Sterile Environment</strong>
                     <span className="text-base text-gray-800 font-medium mt-2 bg-white/70 px-3 py-2 rounded">Our operating theatres are maintained with the highest standards of sterility to ensure patient safety and infection control.</span>
                   </div>
                 </li>
-                <li className="relative rounded-2xl shadow-lg p-8 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                <li className="relative rounded-2xl shadow-lg p-8 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="flip-left" data-aos-delay="100">
                   <img src="/images/about-features/Anesthesia Options.png" alt="Anesthesia Options" className="absolute inset-0 w-full h-full object-cover opacity-40" />
                   <div className="relative z-10 flex flex-col items-center">
                     <strong className="block text-xl text-blue-900 mb-2 bg-white/80 px-3 py-1 rounded">Anesthesia Options</strong>
                     <span className="text-base text-gray-800 font-medium mt-2 bg-white/70 px-3 py-2 rounded">We offer a range of anesthesia options for patient comfort during complex dental procedures.</span>
                   </div>
                 </li>
-                <li className="relative rounded-2xl shadow-lg p-8 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                <li className="relative rounded-2xl shadow-lg p-8 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="zoom-in-down" data-aos-delay="200">
                   <img src="/images/about-features/Ease of Adjustment.png" alt="Ease of Adjustment" className="absolute inset-0 w-full h-full object-cover opacity-40" />
                   <div className="relative z-10 flex flex-col items-center">
                     <strong className="block text-xl text-blue-900 mb-2 bg-white/80 px-3 py-1 rounded">Ease of Adjustment</strong>
                     <span className="text-base text-gray-800 font-medium mt-2 bg-white/70 px-3 py-2 rounded">Our equipment and lighting are fully adjustable for optimal access and visibility during every procedure.</span>
                   </div>
                 </li>
-                <li className="relative rounded-2xl shadow-lg p-8 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                <li className="relative rounded-2xl shadow-lg p-8 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="flip-right" data-aos-delay="300">
                   <img src="/images/about-features/Infection Control.png" alt="Infection Control" className="absolute inset-0 w-full h-full object-cover opacity-40" />
                   <div className="relative z-10 flex flex-col items-center">
                     <strong className="block text-xl text-blue-900 mb-2 bg-white/80 px-3 py-1 rounded">Infection Control</strong>
