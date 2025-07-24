@@ -1,4 +1,4 @@
-// ...existing code...
+
 import { Hero } from "@/components/Hero";
 import { Services } from "@/components/Services";
 import { AboutPreview } from "@/components/AboutPreview";
@@ -8,8 +8,8 @@ import { Footer } from "@/components/Footer";
 import { doctors } from "@/data/doctors";
 import { FloatingChatBot } from "@/components/FloatingChatBot";
 import WelcomePopup from "@/components/WelcomePopup";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import React from "react";
 import { motion } from "framer-motion";
 
 // Framer Motion animation variants
@@ -23,6 +23,16 @@ const cardVariants = {
 
 const Index = () => {
   const navigate = useNavigate();
+  const [currentDoctor, setCurrentDoctor] = useState(0);
+  const CARD_WIDTH = 270;
+  const maxIndex = Math.max(0, doctors.length - 1);
+
+  const handleNextDoctor = () => {
+    setCurrentDoctor((prev) => (prev < maxIndex ? prev + 1 : prev));
+  };
+  const handlePrevDoctor = () => {
+    setCurrentDoctor((prev) => (prev > 0 ? prev - 1 : prev));
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100">
       <Header />
@@ -36,33 +46,28 @@ const Index = () => {
           Explore Our Services
         </button>
       </div>
-      {/* Our Doctors Section with vertical scroll animation */}
-      <section className="py-20">
+      {/* Our Doctors Section with Pure HTML/CSS/JS Slider */}
+      <section className="doctor-slider-section py-20">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-10 text-blue-900">Our Doctors</h2>
-          <div className="flex gap-8 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-blue-200 scrollbar-track-blue-50 scroll-smooth" style={{ WebkitOverflowScrolling: 'touch' }}>
-            {doctors.map((doctor, idx) => (
-              <motion.div
-                key={doctor.id}
-                className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col items-center p-6 min-w-[320px]"
-                variants={{
-                  hidden: { opacity: 0, x: 80 },
-                  visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeOut" } },
-                }}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-              >
-                <img src={doctor.image} alt={doctor.name} className="w-40 h-40 object-cover rounded-full mb-4 border-4 border-blue-200" />
-                <h3 className="text-2xl font-bold text-blue-800 mb-2">{doctor.name}</h3>
-                <p className="text-blue-600 mb-2">{doctor.title}</p>
-                <p className="text-gray-600 text-center mb-2">{doctor.specialties.join(', ')}</p>
-                <p className="text-gray-500 text-sm mb-2">Experience: {doctor.experience}</p>
-              </motion.div>
-            ))}
+          <div className="slider-container relative">
+            <button className="slide-btn prev" onClick={handlePrevDoctor}>&#x2039;</button>
+            <div className="slider-track flex gap-5 transition-transform duration-500 ease-out" style={{ transform: `translateX(-${currentDoctor * 270}px)` }}>
+              {doctors.map((doctor, idx) => (
+                <div className="doctor-card min-w-[250px] bg-white/60 backdrop-blur-lg rounded-2xl p-6 shadow-lg text-center flex flex-col items-center" key={doctor.id}>
+                  <img src={doctor.image} alt={doctor.name} className="w-32 h-32 object-cover rounded-full mb-4 border-4 border-blue-200" />
+                  <h3 className="text-xl font-bold text-blue-800 mb-1">{doctor.name}</h3>
+                  <p className="text-blue-600 mb-1">{doctor.title}</p>
+                  <p className="text-gray-600 text-center mb-1">{doctor.specialties.join(', ')}</p>
+                  <p className="text-gray-500 text-sm mb-1">Experience: {doctor.experience}</p>
+                </div>
+              ))}
+            </div>
+            <button className="slide-btn next" onClick={handleNextDoctor}>&#x203A;</button>
           </div>
         </div>
       </section>
+
       <Footer />
       <FloatingCTA />
       {/* Floating ChatBot at bottom center with navigation */}

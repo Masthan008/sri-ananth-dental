@@ -27,8 +27,8 @@ export const ServicesGrid = () => {
           </div>
           <div className="p-4">
             <p className="text-gray-600 line-clamp-2">{service.description}</p>
-            <div className="mt-4 flex justify-between items-center">
-              <span className="text-blue-600 font-semibold">{service.price}</span>
+            {/* Removed price/amount display as requested */}
+            <div className="mt-4 flex justify-end items-center">
               <span className="text-gray-500 text-sm">{service.duration}</span>
             </div>
           </div>

@@ -309,12 +309,7 @@ const ServiceDetail = () => {
                                     <span className="text-gray-900 font-medium">{subService.duration}</span>
                                   </li>
                                 )}
-                                {subService.price && (
-                                  <li className="flex justify-between">
-                                    <span className="text-gray-500">{t('price', 'Price')}:</span>
-                                    <span className="text-blue-600 font-semibold">{subService.price}</span>
-                                  </li>
-                                )}
+                                {/* Price removed as per request */}
                               </ul>
                               
                               {subService.features && subService.features.length > 0 && (

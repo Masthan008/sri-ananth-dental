@@ -30,7 +30,7 @@ export interface Service {
   icon: React.ComponentType<any>;
   features: string[];
   duration: string;
-  price: string;
+  price?: string;
   image: string;
   details?: string[];
   popular?: boolean;
@@ -62,7 +62,7 @@ export const services: Service[] = [
       'Early Orthodontic Treatment'
     ],
     duration: 'Varies',
-    price: 'Starts at ₹25,000',
+    // price removed
     image: '/images/services/ORTHODONTICS - SADH.png',
     details: [
       'Orthodontic treatment helps align teeth and jaws for a healthier, more attractive smile.',
@@ -84,7 +84,7 @@ export const services: Service[] = [
       'Child-Friendly Environment'
     ],
     duration: '30-60 minutes',
-    price: 'Starts at ₹400',
+    // price removed
     image: '/images/services/PEDIATRIC DENTISTRY - SADH.png',
     details: [
       'Our pediatric dental team specializes in making visits fun and stress-free for kids.',
@@ -106,7 +106,7 @@ export const services: Service[] = [
       'Maintenance Programs'
     ],
     duration: '45-90 minutes',
-    price: 'Starts at ₹1,500',
+    // price removed
     image: '/images/services/PERIODONTITIS - SADH.png',
     details: [
       'Healthy gums are essential for a healthy mouth. Our periodontist provides advanced care for gum disease and related conditions.'
@@ -126,7 +126,7 @@ export const services: Service[] = [
       'Oral Cancer Screening'
     ],
     duration: '30-45 minutes',
-    price: 'Starts at ₹500',
+    // price removed
     image: '/images/services/DENTAL CHECKUP - SADH.png',
     details: [
       'Regular dental checkups help maintain oral health and catch issues early.'
@@ -146,7 +146,7 @@ export const services: Service[] = [
       'Natural Appearance'
     ],
     duration: '30-60 minutes',
-    price: 'Starts at ₹800',
+    // price removed
     image: '/images/services/DENTAL FILLINGS  - SADH.png',
     details: [
       'Dental fillings restore function and aesthetics to damaged teeth.'
@@ -168,7 +168,7 @@ export const services: Service[] = [
       'Implant Crowns'
     ],
     duration: '3-6 months',
-    price: 'From ₹1,999',
+    // price removed
     image: '/images/services/DENTAL IMPLANTS  - SADH.png',
     details: [
       'Dental implants are the gold standard for replacing missing teeth, offering a permanent solution that looks, feels, and functions like natural teeth.'
@@ -188,7 +188,7 @@ export const services: Service[] = [
       'Bonding'
     ],
     duration: '60-120 minutes',
-    price: 'Starts at ₹2,000',
+    // price removed
     image: '/images/services/DENTAL RESTORATION - SADH.png',
     details: [
       'Dental restorations improve oral health and aesthetics.'
@@ -208,7 +208,7 @@ export const services: Service[] = [
       'Natural Look'
     ],
     duration: '2-3 visits',
-    price: 'Starts at ₹10,000',
+    // price removed
     image: '/images/services/DENTAL VENEERS - SADH.png',
     details: [
       'Veneers are a cosmetic solution for chips, gaps, and discoloration.'
@@ -230,7 +230,7 @@ export const services: Service[] = [
       'Broken Dentures'
     ],
     duration: '30-120 minutes',
-    price: 'From ₹99',
+    // price removed
     image: '/images/services/EMERGENCY DENTSITRY  - SADH.png',
     details: [
       'Dental emergencies can happen at any time, and we are here to help.'
@@ -250,7 +250,7 @@ export const services: Service[] = [
       'Faster Healing'
     ],
     duration: '30-60 minutes',
-    price: 'Starts at ₹2,500',
+    // price removed
     image: '/images/services/LASER DENTISTRY  - SADH.png',
     details: [
       'Laser dentistry offers precise and comfortable treatments.'
@@ -270,7 +270,7 @@ export const services: Service[] = [
       'Cyst/Tumor Removal'
     ],
     duration: 'Varies',
-    price: 'Consult for pricing',
+    // price removed
     image: '/images/services/MAXILLOFACIAL SURGERY - SADH.png',
     details: [
       'Maxillofacial surgery treats complex conditions of the face and jaw.'
@@ -290,7 +290,7 @@ export const services: Service[] = [
       'Minor Surgeries'
     ],
     duration: 'Varies',
-    price: 'Consult for pricing',
+    // price removed
     image: '/images/services/ORAL SURGERY - SADH.png',
     details: [
       'Oral surgery is performed for a variety of dental conditions.'
@@ -310,7 +310,7 @@ export const services: Service[] = [
       'High Success Rate'
     ],
     duration: '60-90 minutes',
-    price: 'Starts at ₹3,000',
+    // price removed
     image: '/images/services/ROOT CANAL  - SADH.png',
     details: [
       'Root canal treatment saves teeth that would otherwise be lost.'
@@ -330,7 +330,7 @@ export const services: Service[] = [
       'Oral Hygiene Advice'
     ],
     duration: '30-45 minutes',
-    price: 'Starts at ₹500',
+    // price removed
     image: '/images/services/TEETH CLEANING  - SADH.png',
     details: [
       'Teeth cleaning is essential for oral health and fresh breath.'
@@ -350,7 +350,7 @@ export const services: Service[] = [
       'Consultation'
     ],
     duration: 'Varies',
-    price: 'Consult for pricing',
+    // price removed
     image: '/images/services/WISDOM TEETH - SADH.png',
     details: [
       'Wisdom teeth can cause pain and crowding; removal is often recommended.'
@@ -370,7 +370,7 @@ export const services: Service[] = [
       'Long-Lasting'
     ],
     duration: '2-3 visits',
-    price: 'Starts at ₹8,000',
+    // price removed
     image: '/images/services/BRIDGES - SADH.png',
     details: [
       'Dental bridges fill gaps and restore your smile.'
@@ -392,7 +392,7 @@ export const services: Service[] = [
       'Tooth Extractions'
     ],
     duration: '30-90 minutes',
-    price: 'Starts at ₹500',
+    // price removed
     image: '/images/services/general-dentistry.jpg',
     details: [
       'Our general dentistry services are designed to maintain optimal oral health for patients of all ages. We focus on preventive care to help you avoid dental problems before they start.',
@@ -405,7 +405,7 @@ export const services: Service[] = [
         id: 'cleanings',
         title: 'Dental Cleanings',
         description: 'Professional teeth cleaning to remove plaque and tartar.',
-        price: '₹500 - ₹1,000',
+        // price removed
         duration: '45-60 minutes',
         features: [
           'Plaque and tartar removal',
@@ -418,7 +418,7 @@ export const services: Service[] = [
         id: 'fillings',
         title: 'Tooth Fillings',
         description: 'Restore damaged teeth with tooth-colored fillings.',
-        price: '₹800 - ₹2,500 per filling',
+        // price removed
         duration: '30-60 minutes',
         features: [
           'Tooth-colored composite fillings',
@@ -454,7 +454,7 @@ export const services: Service[] = [
       'Smile Makeovers'
     ],
     duration: '1-3 hours',
-    price: 'From ₹2,000',
+    // price removed
     image: '/images/services/cosmetic-dentistry.jpg',
     details: [
       'Transform your smile with our comprehensive cosmetic dentistry services. Whether you\'re looking for subtle changes or a complete smile makeover, we have the solutions to help you achieve the smile you\'ve always wanted.',
@@ -467,7 +467,7 @@ export const services: Service[] = [
         id: 'teeth-whitening',
         title: 'Teeth Whitening',
         description: 'Professional teeth whitening for a brighter, whiter smile.',
-        price: '₹2,000 - ₹5,000',
+        // price removed
         duration: '1 hour',
         features: [
           'In-office whitening treatment',
@@ -480,7 +480,7 @@ export const services: Service[] = [
         id: 'porcelain-veneers',
         title: 'Porcelain Veneers',
         description: 'Thin, custom-made shells to improve your smile.',
-        price: '₹10,000 - ₹25,000 per tooth',
+        // price removed
         duration: '2-3 visits',
         features: [
           'Custom-made for your smile',
@@ -493,7 +493,7 @@ export const services: Service[] = [
         id: 'dental-bonding',
         title: 'Dental Bonding',
         description: 'Quick and affordable cosmetic solution for minor imperfections.',
-        price: '₹3,000 - ₹6,000 per tooth',
+        // price removed
         duration: '30-60 minutes',
         features: [
           'Single-visit treatment',
