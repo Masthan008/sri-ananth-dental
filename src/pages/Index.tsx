@@ -48,18 +48,26 @@ const Index = () => {
       </div>
       {/* Our Doctors Section with Pure HTML/CSS/JS Slider */}
       <section className="doctor-slider-section py-20">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-10 text-blue-900">Our Doctors</h2>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl font-bold text-gray-900 text-center mb-10">Our Doctors</h2>
           <div className="slider-container relative">
             <button className="slide-btn prev" onClick={handlePrevDoctor}>&#x2039;</button>
-            <div className="slider-track flex gap-5 transition-transform duration-500 ease-out" style={{ transform: `translateX(-${currentDoctor * 270}px)` }}>
+            <div className="slider-track flex gap-8 transition-transform duration-500 ease-out" style={{ transform: `translateX(-${currentDoctor * 340}px)` }}>
               {doctors.map((doctor, idx) => (
-                <div className="doctor-card min-w-[250px] bg-white/60 backdrop-blur-lg rounded-2xl p-6 shadow-lg text-center flex flex-col items-center" key={doctor.id}>
-                  <img src={doctor.image} alt={doctor.name} className="w-32 h-32 object-cover rounded-full mb-4 border-4 border-blue-200" />
-                  <h3 className="text-xl font-bold text-blue-800 mb-1">{doctor.name}</h3>
-                  <p className="text-blue-600 mb-1">{doctor.title}</p>
-                  <p className="text-gray-600 text-center mb-1">{doctor.specialties.join(', ')}</p>
-                  <p className="text-gray-500 text-sm mb-1">Experience: {doctor.experience}</p>
+                <div className="doctor-card min-w-[320px] bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:scale-[1.02] transition-all duration-300 cursor-pointer overflow-hidden h-full flex flex-col" key={doctor.id}>
+                  <div className="relative overflow-hidden h-80 bg-gray-100">
+                    <img src={doctor.image} alt={doctor.name} className="w-full h-full object-contain transition-transform duration-500" style={{ objectPosition: 'center 30%' }} />
+                  </div>
+                  <div className="p-6 flex-1 flex flex-col">
+                    <h3 className="text-2xl font-bold text-blue-800 mb-1">{doctor.name}</h3>
+                    <p className="text-blue-600 text-lg mb-1">{doctor.title}</p>
+                    <div className="flex flex-wrap gap-2 mb-2">
+                      {doctor.specialties.map((specialty, idx) => (
+                        <span key={idx} className="bg-blue-50 text-blue-700 text-xs px-2.5 py-1 rounded">{specialty}</span>
+                      ))}
+                    </div>
+                    <p className="text-gray-500 text-sm mb-1">Experience: {doctor.experience}</p>
+                  </div>
                 </div>
               ))}
             </div>
