@@ -9,15 +9,24 @@ import { HeroSection } from '@/components/HeroSection';
 import { useTranslation } from 'react-i18next';
 import { doctors } from '@/data/doctors';
 import { Badge } from '@/components/ui/badge';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
 
 const Team = () => {
   const { t } = useTranslation('common');
   const navigate = useNavigate();
+  const teamSectionRef = useRef<HTMLDivElement>(null);
+  const doctorCardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
+  // Initialize animations
   useEffect(() => {
+    // Initialize AOS
     AOS.init({
       duration: 800,
       easing: 'ease-in-out',
@@ -25,6 +34,96 @@ const Team = () => {
       mirror: false,
       offset: 100
     });
+
+    // Initialize GSAP animations
+    const ctx = gsap.context(() => {
+      // Animate doctor cards with staggered entrance
+      doctorCardsRef.current.forEach((card, index) => {
+        if (!card) return;
+        
+        // Set initial state
+        gsap.set(card, {
+          y: 50,
+          opacity: 0,
+          scale: 0.95
+        });
+
+        // Create animation
+        gsap.to(card, {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          delay: index * 0.1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+            once: true
+          },
+          onComplete: () => {
+            // Add hover effect after initial animation
+            card.addEventListener('mouseenter', () => {
+              gsap.to(card, { 
+                y: -5,
+                duration: 0.3,
+                boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+              });
+            });
+            
+            card.addEventListener('mouseleave', () => {
+              gsap.to(card, { 
+                y: 0,
+                duration: 0.3,
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+              });
+            });
+          }
+        });
+      });
+
+      // Animate section title
+      const title = teamSectionRef.current?.querySelector('h2');
+      const subtitle = teamSectionRef.current?.querySelector('p');
+
+      if (title) {
+        gsap.fromTo(title,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            scrollTrigger: {
+              trigger: title,
+              start: 'top 90%',
+              toggleActions: 'play none none none',
+              once: true
+            }
+          }
+        );
+      }
+
+      if (subtitle) {
+        gsap.fromTo(subtitle,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            delay: 0.2,
+            scrollTrigger: {
+              trigger: subtitle,
+              start: 'top 90%',
+              toggleActions: 'play none none none',
+              once: true
+            }
+          }
+        );
+      }
+    }, teamSectionRef);
+
+    return () => ctx.revert(); // Cleanup
   }, []);
   
   // Function to handle doctor card click
@@ -46,13 +145,9 @@ const Team = () => {
       />
       <main className="pt-12">
         {/* Our Dentists */}
-        <section className="py-20">
+        <section className="py-20" ref={teamSectionRef}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div 
-              className="text-center mb-16"
-              data-aos="fade-up"
-              data-aos-delay="100"
-            >
+            <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-gray-900 mb-4">
                 {t('team.ourDentists', 'Our Expert Dentists')}
               </h2>
@@ -62,13 +157,15 @@ const Team = () => {
             </div>
             <div className="grid md:grid-cols-2 gap-8">
               {doctors.map((doctor, index) => (
-                <Card 
+                <div 
                   key={doctor.id}
-                  className="group hover:shadow-2xl transition-all duration-300 bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:scale-[1.02] cursor-pointer overflow-hidden h-full flex flex-col"
-                  onClick={() => handleDoctorClick(doctor.id)}
-                  data-aos="fade-up"
-                  data-aos-delay={150 * (index % 2) + 100}
+                  ref={el => doctorCardsRef.current[index] = el}
+                  className="opacity-0" // Will be animated by GSAP
                 >
+                  <Card 
+                    className="group hover:shadow-2xl transition-all duration-300 bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:scale-[1.02] cursor-pointer overflow-hidden h-full flex flex-col"
+                    onClick={() => handleDoctorClick(doctor.id)}
+                  >
                   <div className="relative overflow-hidden h-80 bg-gray-100">
                     <div className="relative w-full h-full">
                       <img 
@@ -167,7 +264,8 @@ const Team = () => {
                       </Button>
                     </CardFooter>
                   </CardContent>
-                </Card>
+                  </Card>
+                </div>
               ))}
             </div>
           </div>

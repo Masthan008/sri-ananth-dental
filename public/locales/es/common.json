@@ -8,7 +8,12 @@
     "gallery": "Galería",
     "blog": "Blog",
     "contact": "Contacto",
-    "booking": "Reservar Cita"
+    "booking": "Reservar Cita",
+    "more": "Más",
+    "insurance": "Seguro Dental",
+    "faq": "Preguntas Frecuentes",
+    "careers": "Carreras",
+    "testimonials": "Testimonios"
   },
   "hero": {
     "title": "Tu Sonrisa, Nuestra Prioridad",

@@ -8,7 +8,12 @@
     "gallery": "Gallery",
     "blog": "Blog",
     "contact": "Contact",
-    "booking": "Book Appointment"
+    "booking": "Book Appointment",
+    "more": "More",
+    "insurance": "Insurance",
+    "faq": "FAQ",
+    "careers": "Careers",
+    "testimonials": "Testimonials"
   },
   "hero": {
     "title": "Your Smile Our Priority",

@@ -24,6 +24,10 @@ import NotFound from "./pages/NotFound";
 import Gallery from "./pages/Gallery";
 import Blog from "./pages/Blog";
 import DoctorProfile from "./pages/DoctorProfile";
+import Insurance from "./pages/info-pages/Insurance";
+import FAQ from "./pages/info-pages/FAQ";
+import Careers from "./pages/info-pages/Careers";
+import Testimonials from "./pages/info-pages/Testimonials";
 import './styles/global.css';
 
 const queryClient = new QueryClient({
@@ -124,6 +128,11 @@ const App = () => {
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/doctors/:id" element={<DoctorProfile />} />
+                {/* Info Pages */}
+                <Route path="/insurance" element={<Insurance />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/careers" element={<Careers />} />
+                <Route path="/testimonials" element={<Testimonials />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
                 </Routes>

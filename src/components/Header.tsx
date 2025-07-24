@@ -1,28 +1,64 @@
 
-import { useState } from "react";
-import { Menu, X, Phone, MapPin, Clock } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { Menu, X, Phone, MapPin, Clock, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
+
+// Type for navigation items
+type NavItem = {
+  name: string;
+  path: string;
+  children?: NavItem[];
+};
 
 // Logo is served from the public directory
 const logoPath = "/images/logo.png";
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const { t } = useTranslation('common');
 
-  const navItems = [
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setOpenDropdown(null);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const toggleDropdown = (itemName: string) => {
+    setOpenDropdown(openDropdown === itemName ? null : itemName);
+  };
+
+  const navItems: NavItem[] = [
     { name: t('nav.home'), path: "/" },
     { name: t('nav.about'), path: "/about" },
     { name: t('nav.services'), path: "/services" },
     { name: t('nav.team'), path: "/team" },
-    { name: t('nav.patientInfo', 'Patient Info'), path: "/patient-info" },
-    { name: t('nav.gallery'), path: "/gallery" },
-    { name: t('nav.blog'), path: "/blog" },
-    { name: t('nav.contact'), path: "/contact" },
+    { 
+      name: t('nav.more', 'More'), 
+      path: "#",
+      children: [
+        { name: t('nav.insurance', 'Insurance'), path: "/insurance" },
+        { name: t('nav.faq', 'FAQ'), path: "/faq" },
+        { name: t('nav.careers', 'Careers'), path: "/careers" },
+        { name: t('nav.testimonials', 'Testimonials'), path: "/testimonials" },
+        { name: t('nav.patientInfo', 'Patient Info'), path: "/patient-info" },
+        { name: t('nav.gallery', 'Gallery'), path: "/gallery" },
+        { name: t('nav.blog', 'Blog'), path: "/blog" },
+      ]
+    },
+    { name: t('nav.contact', 'Contact'), path: "/contact" },
   ];
 
   return (
@@ -83,15 +119,50 @@ export const Header = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-4">
             {navItems.map((item) => (
-              <button
-                key={item.name}
-                onClick={() => navigate(item.path)}
-                className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
-              >
-                {item.name}
-              </button>
+              <div key={item.name} className="relative" ref={item.children ? dropdownRef : null}>
+                {item.children ? (
+                  <div className="relative">
+                    <button
+                      onClick={() => toggleDropdown(item.name)}
+                      className="flex items-center text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium px-2 py-2 rounded-md"
+                    >
+                      {item.name}
+                      {openDropdown === item.name ? (
+                        <ChevronUp className="ml-1 h-4 w-4" />
+                      ) : (
+                        <ChevronDown className="ml-1 h-4 w-4" />
+                      )}
+                    </button>
+                    {openDropdown === item.name && (
+                      <div className="absolute z-10 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                        <div className="py-1">
+                          {item.children.map((child) => (
+                            <button
+                              key={child.name}
+                              onClick={() => {
+                                navigate(child.path);
+                                setOpenDropdown(null);
+                              }}
+                              className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            >
+                              {child.name}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => navigate(item.path)}
+                    className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium px-2 py-2 rounded-md"
+                  >
+                    {item.name}
+                  </button>
+                )}
+              </div>
             ))}
           </nav>
 
@@ -113,18 +184,53 @@ export const Header = () => {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-              <nav className="flex flex-col space-y-4 mt-8">
+              <nav className="flex flex-col space-y-2 mt-4">
                 {navItems.map((item) => (
-                  <button
-                    key={item.name}
-                    onClick={() => {
-                      navigate(item.path);
-                      setIsOpen(false);
-                    }}
-                    className="text-left text-sm text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium py-1.5"
-                  >
-                    {item.name}
-                  </button>
+                  <div key={item.name} className="w-full">
+                    {item.children ? (
+                      <div className="mb-2">
+                        <button
+                          onClick={() => toggleDropdown(item.name)}
+                          className="flex items-center justify-between w-full text-left text-sm text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium py-2 px-2 rounded-md"
+                        >
+                          <span>{item.name}</span>
+                          {openDropdown === item.name ? (
+                            <ChevronUp className="h-4 w-4" />
+                          ) : (
+                            <ChevronDown className="h-4 w-4" />
+                          )}
+                        </button>
+                        {openDropdown === item.name && (
+                          <div className="ml-4 mt-1 space-y-1">
+                            {item.children.map((child) => (
+                              <button
+                                key={child.name}
+                                onClick={() => {
+                                  navigate(child.path);
+                                  setIsOpen(false);
+                                  setOpenDropdown(null);
+                                }}
+                                className="block w-full text-left text-sm text-gray-600 hover:text-blue-600 py-1.5 px-2 rounded-md hover:bg-gray-50"
+                              >
+                                {child.name}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => {
+                          navigate(item.path);
+                          setIsOpen(false);
+                          setOpenDropdown(null);
+                        }}
+                        className="w-full text-left text-sm text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium py-2 px-2 rounded-md hover:bg-gray-50"
+                      >
+                        {item.name}
+                      </button>
+                    )}
+                  </div>
                 ))}
                 <Button 
                   onClick={() => {
