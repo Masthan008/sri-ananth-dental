@@ -7,29 +7,101 @@ import { FloatingCTA } from '@/components/FloatingCTA';
 import { HeroSection } from '@/components/HeroSection';
 import { useTranslation } from 'react-i18next';
 import { doctors } from '@/data/doctors';
-import { motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// Framer Motion animation variants
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: i * 0.1,
-      duration: 0.7,
-      ease: "easeOut"
-    }
-  })
-};
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
 
 const Team = () => {
   const { t } = useTranslation('common');
   const navigate = useNavigate();
 
+  const doctorCardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const sectionRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+
+  // Initialize GSAP animations
+  useEffect(() => {
+    // Animate heading
+    if (headingRef.current) {
+      gsap.fromTo(headingRef.current,
+        { opacity: 0, y: 40 },
+        { 
+          opacity: 1, 
+          y: 0, 
+          duration: 1,
+          scrollTrigger: {
+            trigger: headingRef.current,
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
+    }
+
+    // Animate doctor cards with staggered effect
+    doctorCardsRef.current.forEach((card, i) => {
+      if (!card) return;
+      
+      gsap.fromTo(card,
+        { 
+          opacity: 0,
+          y: 60,
+          scale: 0.95
+        },
+        { 
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          delay: i * 0.1,
+          ease: 'back.out(1.4)',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          },
+          onComplete: () => {
+            // Add hover effect after initial animation
+            gsap.to(card, {
+              y: -5,
+              duration: 0.3,
+              boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+              scrollTrigger: {
+                trigger: card,
+                start: 'top bottom',
+                onEnter: () => {
+                  gsap.to(card, {
+                    y: -5,
+                    duration: 0.3,
+                    boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+                  });
+                },
+                onLeaveBack: () => {
+                  gsap.to(card, {
+                    y: 0,
+                    duration: 0.3,
+                    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+                  });
+                }
+              }
+            });
+          }
+        }
+      );
+    });
+
+    // Cleanup function
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
+
   // Function to handle doctor card click
   const handleDoctorClick = (doctorId: number) => {
-    navigate(`/team/doctor/${doctorId}`);
+    navigate(`/doctors/${doctorId}`);
   };
 
   return (
@@ -46,8 +118,11 @@ const Team = () => {
         {/* Our Dentists */}
         <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <div className="text-center mb-16" ref={el => sectionRef.current = el}>
+              <h2 
+                className="text-4xl font-bold text-gray-900 mb-4"
+                ref={headingRef}
+              >
                 Our Expert Dentists
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -56,14 +131,10 @@ const Team = () => {
             </div>
             <div className="space-y-12">
               {doctors.map((doctor, index) => (
-                <motion.div 
+                <div 
                   key={doctor.id}
-                  className="flex flex-col md:flex-row items-center bg-white rounded-xl shadow-lg overflow-hidden h-auto md:h-[400px] w-full"
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-100px" }}
-                  variants={cardVariants}
-                  custom={index}
+                  ref={el => doctorCardsRef.current[index] = el}
+                  className="flex flex-col md:flex-row items-center bg-white rounded-xl shadow-lg overflow-hidden h-auto md:h-[400px] w-full transform transition-all duration-300 cursor-pointer hover:shadow-xl"
                   onClick={() => handleDoctorClick(doctor.id)}
                 >
                   <div className="md:w-1/2 h-64 md:h-full bg-gray-100 flex items-center justify-center p-8">
@@ -105,7 +176,7 @@ const Team = () => {
                       View Profile
                     </Button>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
