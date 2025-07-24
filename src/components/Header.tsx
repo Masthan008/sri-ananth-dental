@@ -6,6 +6,9 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 
+// Import Montserrat font using Google Fonts
+import './fonts.css';
+
 // Type for navigation items
 type NavItem = {
   name: string;
@@ -112,8 +115,9 @@ export const Header = () => {
               className="cursor-pointer" 
               onClick={() => navigate("/")}
             >
-              <h1 className="text-xl font-bold text-blue-800 hover:text-blue-700 transition-colors">
-                Sri Ananth Dental Hospital
+              <h1 className="header-clinic-name">
+                <span className="clinic-name">SRI ANANTH</span>
+                <span className="clinic-tagline">DENTAL HOSPITAL</span>
               </h1>
             </div>
           </div>

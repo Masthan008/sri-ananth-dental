@@ -354,8 +354,16 @@ const About = () => {
         <section className="py-20 bg-gradient-to-b from-blue-50 to-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-8">
-              {/* Mission Card with consistent styling */}
-              <div className="relative rounded-3xl overflow-hidden shadow-xl min-h-[350px] flex flex-col justify-end bg-gradient-to-br from-blue-700 to-blue-800" data-aos="fade-up" data-aos-delay="0">
+              {/* Mission Card with background image */}
+              <div className="relative rounded-3xl overflow-hidden shadow-xl min-h-[350px] flex flex-col justify-end" data-aos="fade-up" data-aos-delay="0">
+                <div className="absolute inset-0">
+                  <img 
+                    src="/images/our-mission.jpg" 
+                    alt="Our Mission" 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/70"></div>
+                </div>
                 <div className="relative z-10 p-10 flex flex-col items-center">
                   <h3 className="text-3xl font-extrabold mb-4 text-white drop-shadow-lg">Our Mission</h3>
                   <p className="text-lg text-blue-100 leading-relaxed text-center font-medium drop-shadow-md feature-section">
@@ -363,86 +371,22 @@ const About = () => {
                   </p>
                 </div>
               </div>
-              {/* Vision Card with consistent styling */}
-              <div className="relative rounded-3xl overflow-hidden shadow-xl min-h-[350px] flex flex-col justify-end bg-gradient-to-br from-blue-700 to-blue-800" data-aos="fade-up" data-aos-delay="100">
+              
+              {/* Vision Card with background image */}
+              <div className="relative rounded-3xl overflow-hidden shadow-xl min-h-[350px] flex flex-col justify-end" data-aos="fade-up" data-aos-delay="100">
+                <div className="absolute inset-0">
+                  <img 
+                    src="/images/our-vision.jpg" 
+                    alt="Our Vision" 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/70"></div>
+                </div>
                 <div className="relative z-10 p-10 flex flex-col items-center">
                   <h3 className="text-3xl font-extrabold mb-4 text-white drop-shadow-lg">Our Vision</h3>
                   <p className="text-lg text-blue-100 leading-relaxed text-center font-medium drop-shadow-md feature-section">
                     To be the leading dental practice in our community, known for excellence in patient care, advanced technology, and creating lasting relationships built on trust and outstanding results.
                   </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Why Choose Us Section with Image on Left */}
-        <section className="py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              {/* Image on Left */}
-              <div className="relative" data-aos="fade-right">
-                <img 
-                  src="/images/why-choose-us.jpg" 
-                  alt="Why Choose Sri Ananth Dental Hospital" 
-                  className="rounded-2xl shadow-2xl w-full h-auto"
-                />
-                <div className="absolute -bottom-6 -right-6 bg-blue-600 text-white p-4 rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="300">
-                  <div className="text-3xl font-bold">15+</div>
-                  <div className="text-sm">Years of Experience</div>
-                </div>
-              </div>
-              
-              {/* Content on Right */}
-              <div data-aos="fade-left">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                  Why Choose Sri Ananth Dental Hospital?
-                </h2>
-                <p className="text-lg text-gray-600 mb-8">
-                  We are committed to providing exceptional dental care with a personal touch. Here's what sets us apart:
-                </p>
-                
-                <div className="space-y-6">
-                  {[
-                    {
-                      icon: '👨‍⚕️',
-                      title: 'Expert Dental Team',
-                      description: 'Our experienced dentists and specialists are dedicated to providing the highest quality care.'
-                    },
-                    {
-                      icon: '🏥',
-                      title: 'Modern Facilities',
-                      description: 'Equipped with state-of-the-art technology for accurate diagnosis and effective treatment.'
-                    },
-                    {
-                      icon: '💯',
-                      title: 'Patient-Centered Care',
-                      description: 'We prioritize your comfort and satisfaction at every step of your dental journey.'
-                    },
-                    {
-                      icon: '💰',
-                      title: 'Affordable Options',
-                      description: 'Quality dental care that fits your budget with flexible payment plans available.'
-                    }
-                  ].map((item, index) => (
-                    <div key={index} className="flex items-start space-x-4">
-                      <div className="flex-shrink-0 text-2xl">{item.icon}</div>
-                      <div>
-                        <h4 className="text-lg font-semibold text-gray-900">{item.title}</h4>
-                        <p className="text-gray-600">{item.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                
-                <div className="mt-8">
-                  <Button 
-                    onClick={() => navigate('/contact')}
-                    size="lg"
-                    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
-                  >
-                    Book Your Appointment
-                  </Button>
                 </div>
               </div>
             </div>

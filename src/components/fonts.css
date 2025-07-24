@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+.header-clinic-name {
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.header-clinic-name .clinic-name {
+  font-size: 1.75rem; /* 28px */
+  font-weight: 700;
+  color: #1e40af; /* blue-800 */
+  transition: color 0.2s;
+}
+
+.header-clinic-name .clinic-name:hover {
+  color: #1d4ed8; /* blue-700 */
+}
+
+.header-clinic-name .clinic-tagline {
+  font-size: 0.875rem; /* 14px */
+  font-weight: 400;
+  color: #4b5563; /* gray-600 */
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}

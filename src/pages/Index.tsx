@@ -38,116 +38,65 @@ const Index = () => {
       <Header />
       <Hero />
       
-      {/* Services Preview Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Our Comprehensive Dental Services
-            </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              We offer a wide range of dental services to keep your smile healthy and beautiful.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: 'General Dentistry',
-                description: 'Routine checkups, cleanings, and preventive care to maintain optimal oral health.',
-                icon: '🦷',
-                href: '/services/general-dentistry'
-              },
-              {
-                title: 'Cosmetic Dentistry',
-                description: 'Enhance your smile with our cosmetic treatments including teeth whitening and veneers.',
-                icon: '✨',
-                href: '/services/cosmetic-dentistry'
-              },
-              {
-                title: 'Orthodontics',
-                description: 'Straighten your teeth and correct your bite with our orthodontic solutions.',
-                icon: '🦴',
-                href: '/services/orthodontics'
-              },
-              {
-                title: 'Emergency Care',
-                description: 'Immediate attention for dental emergencies to relieve pain and prevent complications.',
-                icon: '🚑',
-                href: '/services/emergency-care'
-              },
-              {
-                title: 'Pediatric Dentistry',
-                description: 'Gentle dental care designed specifically for children and young adults.',
-                icon: '👶',
-                href: '/services/pediatric-dentistry'
-              },
-              {
-                title: 'Restorative Dentistry',
-                description: 'Repair and restore damaged teeth with our advanced restorative treatments.',
-                icon: '🛠️',
-                href: '/services/restorative-dentistry'
-              }
-            ].map((service, index) => (
-              <div 
-                key={index}
-                className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300 cursor-pointer"
-                onClick={() => navigate(service.href)}
-              >
-                <div className="p-6">
-                  <div className="text-4xl mb-4">{service.icon}</div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{service.title}</h3>
-                  <p className="text-gray-600 mb-4">{service.description}</p>
-                  <button 
-                    className="text-blue-600 hover:text-blue-800 font-medium flex items-center"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      navigate(service.href);
-                    }}
-                  >
-                    Learn more
-                    <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <div className="text-center mt-12">
-            <button
-              onClick={() => navigate('/services')}
-              className="bg-blue-600 text-white px-8 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
-            >
-              View All Services
-            </button>
-          </div>
-        </div>
-      </section>
-      {/* Our Doctors Section with Pure HTML/CSS/JS Slider */}
-      <section className="doctor-slider-section py-20">
+      {/* Our Doctors Section */}
+      <section className="py-20 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-gray-900 text-center mb-10">Our Doctors</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Meet Our Expert Dentists</h2>
+          
           <div className="slider-container relative">
-            <button className="slide-btn prev" onClick={handlePrevDoctor}>&#x2039;</button>
+            <button 
+              className="slide-btn prev absolute left-0 top-1/2 -translate-y-1/2 -left-6 z-10 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-gray-100 transition-colors"
+              onClick={handlePrevDoctor}
+            >
+              <span className="text-2xl">&#x2039;</span>
+            </button>
+            
             <div className="slider-track flex flex-col gap-8 transition-transform duration-500 ease-out" style={{ transform: `translateY(-${currentDoctor * 340}px)` }}>
               {doctors.map((doctor, idx) => (
-                <div className="flex items-center bg-white min-h-[400px]" key={doctor.id}>
-                  <div className="flex-1 flex flex-col justify-center pl-16 pr-8">
-                    <h3 className="text-5xl font-extrabold text-gray-900 mb-4">{doctor.name}</h3>
-                    <p className="text-2xl font-semibold text-gray-700 mb-4">{doctor.title}</p>
-                    <div className="text-2xl text-gray-700 mb-4 whitespace-pre-line">
-                      {doctor.specialties.join(", ")}
-                    </div>
+                <div className="flex flex-col md:flex-row items-center bg-white rounded-xl shadow-lg overflow-hidden" key={doctor.id}>
+                  <div className="md:w-1/3 h-64 md:h-auto">
+                    <img 
+                      src={doctor.image} 
+                      alt={doctor.name} 
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <div className="flex-shrink-0 flex items-center justify-center w-[420px] h-[420px]">
-                    <img src={doctor.image} alt={doctor.name} className="w-full h-full object-contain" />
+                  <div className="p-6 md:w-2/3">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{doctor.name}</h3>
+                    <p className="text-blue-600 font-medium mb-3">{doctor.title}</p>
+                    <p className="text-gray-600 mb-4">{doctor.specialties.join(", ")}</p>
+                    <button 
+                      onClick={() => navigate(`/team#${doctor.id}`)}
+                      className="text-blue-600 hover:text-blue-800 font-medium flex items-center"
+                    >
+                      View Profile
+                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
                   </div>
                 </div>
               ))}
             </div>
-            <button className="slide-btn next" onClick={handleNextDoctor}>&#x203A;</button>
+            
+            <button 
+              className="slide-btn next absolute right-0 top-1/2 -translate-y-1/2 -right-6 z-10 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-gray-100 transition-colors"
+              onClick={handleNextDoctor}
+            >
+              <span className="text-2xl">&#x203A;</span>
+            </button>
+          </div>
+          
+          {/* Navigation Dots */}
+          <div className="flex justify-center mt-6 space-x-2">
+            {doctors.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentDoctor(index)}
+                className={`w-3 h-3 rounded-full transition-colors ${currentDoctor === index ? 'bg-blue-600' : 'bg-gray-300 hover:bg-gray-400'}`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
           </div>
         </div>
       </section>

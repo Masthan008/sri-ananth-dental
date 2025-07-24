@@ -366,13 +366,10 @@ const Services = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <p className="text-gray-600">{service.description}</p>
-                  <div className="flex items-center justify-between text-sm">
+                  <div className="flex items-center text-sm">
                     <div className="flex items-center text-gray-500">
                       <Clock className="h-4 w-4 mr-1" />
                       {service.duration}
-                    </div>
-                    <div className="text-green-600 font-semibold">
-                      {service.price}
                     </div>
                   </div>
                   <Button 
