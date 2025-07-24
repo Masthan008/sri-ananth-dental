@@ -85,20 +85,20 @@ const About = () => {
         <section className="py-20 bg-white">
           <div className="max-w-6xl mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center mb-12">
-              <div>
-                <img src="/images/about-features/Dental Checkup.png" alt="Dental Checkup" className="mx-auto mb-6 w-40 h-40 object-contain max-w-[180px] max-h-[180px]" />
-                <h3 className="text-2xl font-extrabold text-gray-800 mb-3">Dental Checkup</h3>
-                <p className="text-lg text-gray-700 font-medium">We proudly conduct free dental checkup camps every year for children and adults to serve the people who cannot afford regular checkups.</p>
+              <div className="flex flex-col items-center bg-white rounded-2xl shadow-lg p-6 h-full">
+                <img src="/images/about-features/Dental Checkup.png" alt="Dental Checkup" className="mb-4 w-44 h-44 object-contain max-w-[200px] max-h-[200px]" />
+                <h3 className="text-2xl font-extrabold text-gray-800 mb-2">Dental Checkup</h3>
+                <p className="text-lg text-gray-700 font-medium mt-2">We proudly conduct free dental checkup camps every year for children and adults to serve the people who cannot afford regular checkups.</p>
               </div>
-              <div>
-                <img src="/images/about-features/Qualified Doctors.png" alt="Qualified Doctors" className="mx-auto mb-6 w-40 h-40 object-contain max-w-[180px] max-h-[180px]" />
-                <h3 className="text-2xl font-extrabold text-gray-800 mb-3">Qualified Doctors</h3>
-                <p className="text-lg text-gray-700 font-medium">We have a team of experienced and best dentist in Hyderabad who works with full dedication to serve our patients better.</p>
+              <div className="flex flex-col items-center bg-white rounded-2xl shadow-lg p-6 h-full">
+                <img src="/images/about-features/Qualified Doctors.png" alt="Qualified Doctors" className="mb-4 w-44 h-44 object-contain max-w-[200px] max-h-[200px]" />
+                <h3 className="text-2xl font-extrabold text-gray-800 mb-2">Qualified Doctors</h3>
+                <p className="text-lg text-gray-700 font-medium mt-2">We have a team of experienced and best dentist in Hyderabad who works with full dedication to serve our patients better.</p>
               </div>
-              <div>
-                <img src="/images/about-features/Emergency Services.png" alt="Emergency Services" className="mx-auto mb-6 w-40 h-40 object-contain max-w-[180px] max-h-[180px]" />
-                <h3 className="text-2xl font-extrabold text-gray-800 mb-3">Emergency Services</h3>
-                <p className="text-lg text-gray-700 font-medium">Fort Dental Clinic in Tolichowki, Hyderabad provides emergency services to patients at any time required.</p>
+              <div className="flex flex-col items-center bg-white rounded-2xl shadow-lg p-6 h-full">
+                <img src="/images/about-features/Emergency Services.png" alt="Emergency Services" className="mb-4 w-44 h-44 object-contain max-w-[200px] max-h-[200px]" />
+                <h3 className="text-2xl font-extrabold text-gray-800 mb-2">Emergency Services</h3>
+                <p className="text-lg text-gray-700 font-medium mt-2">Fort Dental Clinic in Tolichowki, Hyderabad provides emergency services to patients at any time required.</p>
               </div>
             </div>
           </div>
@@ -116,33 +116,25 @@ const About = () => {
                 In dental and oral surgery, lighting in the operating theatre plays a crucial role in ensuring optimal visibility and precision during procedures. Here are some key considerations regarding lighting in a dental operating theatre:
               </p>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-10">
-                <li className="flex items-start gap-8">
-                  <img src="/images/about-features/Sterile Environment.png" alt="Sterile Environment" className="w-32 h-32 object-contain max-w-[128px] max-h-[128px]" />
-                  <div>
-                    <strong className="block text-3xl text-blue-700">Sterile Environment</strong>
-                    <span className="text-xl text-gray-700 font-medium">Our operating theatres are maintained with the highest standards of sterility to ensure patient safety and infection control.</span>
-                  </div>
+                <li className="flex flex-col items-center bg-white rounded-2xl shadow-lg p-8 h-full">
+                  <img src="/images/about-features/Sterile Environment.png" alt="Sterile Environment" className="mb-4 w-40 h-40 object-contain max-w-[160px] max-h-[160px]" />
+                  <strong className="block text-2xl text-blue-700 mb-2">Sterile Environment</strong>
+                  <span className="text-lg text-gray-700 font-medium mt-2">Our operating theatres are maintained with the highest standards of sterility to ensure patient safety and infection control.</span>
                 </li>
-                <li className="flex items-start gap-8">
-                  <img src="/images/about-features/Anesthesia Options.png" alt="Anesthesia Options" className="w-32 h-32 object-contain max-w-[128px] max-h-[128px]" />
-                  <div>
-                    <strong className="block text-3xl text-blue-700">Anesthesia Options</strong>
-                    <span className="text-xl text-gray-700 font-medium">We offer a range of anesthesia options for patient comfort during complex dental procedures.</span>
-                  </div>
+                <li className="flex flex-col items-center bg-white rounded-2xl shadow-lg p-8 h-full">
+                  <img src="/images/about-features/Anesthesia Options.png" alt="Anesthesia Options" className="mb-4 w-40 h-40 object-contain max-w-[160px] max-h-[160px]" />
+                  <strong className="block text-2xl text-blue-700 mb-2">Anesthesia Options</strong>
+                  <span className="text-lg text-gray-700 font-medium mt-2">We offer a range of anesthesia options for patient comfort during complex dental procedures.</span>
                 </li>
-                <li className="flex items-start gap-8">
-                  <img src="/images/about-features/Ease of Adjustment.png" alt="Ease of Adjustment" className="w-32 h-32 object-contain max-w-[128px] max-h-[128px]" />
-                  <div>
-                    <strong className="block text-3xl text-blue-700">Ease of Adjustment</strong>
-                    <span className="text-xl text-gray-700 font-medium">Our equipment and lighting are fully adjustable for optimal access and visibility during every procedure.</span>
-                  </div>
+                <li className="flex flex-col items-center bg-white rounded-2xl shadow-lg p-8 h-full">
+                  <img src="/images/about-features/Ease of Adjustment.png" alt="Ease of Adjustment" className="mb-4 w-40 h-40 object-contain max-w-[160px] max-h-[160px]" />
+                  <strong className="block text-2xl text-blue-700 mb-2">Ease of Adjustment</strong>
+                  <span className="text-lg text-gray-700 font-medium mt-2">Our equipment and lighting are fully adjustable for optimal access and visibility during every procedure.</span>
                 </li>
-                <li className="flex items-start gap-8">
-                  <img src="/images/about-features/Infection Control.png" alt="Infection Control" className="w-32 h-32 object-contain max-w-[128px] max-h-[128px]" />
-                  <div>
-                    <strong className="block text-3xl text-blue-700">Infection Control</strong>
-                    <span className="text-xl text-gray-700 font-medium">Strict infection control protocols are followed to protect both patients and staff at every step.</span>
-                  </div>
+                <li className="flex flex-col items-center bg-white rounded-2xl shadow-lg p-8 h-full">
+                  <img src="/images/about-features/Infection Control.png" alt="Infection Control" className="mb-4 w-40 h-40 object-contain max-w-[160px] max-h-[160px]" />
+                  <strong className="block text-2xl text-blue-700 mb-2">Infection Control</strong>
+                  <span className="text-lg text-gray-700 font-medium mt-2">Strict infection control protocols are followed to protect both patients and staff at every step.</span>
                 </li>
               </ul>
             </div>
@@ -178,24 +170,26 @@ const About = () => {
         <section className="py-20 bg-gradient-to-b from-blue-50 to-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-16">
-              <Card className="bg-gradient-to-br from-blue-600 to-cyan-600 text-white flex flex-col items-center">
-                <CardContent className="p-12 flex flex-col items-center">
-                  <img src="/images/about-features/mission.png" alt="Our Mission" className="w-44 h-44 mb-8 object-contain max-w-[176px] max-h-[176px]" />
-                  <h3 className="text-4xl font-extrabold mb-8">Our Mission</h3>
-                  <p className="text-2xl text-blue-100 leading-relaxed text-center font-medium">
+              {/* Mission Card with background image */}
+              <div className="relative rounded-3xl overflow-hidden shadow-xl min-h-[400px] flex flex-col justify-end bg-blue-700">
+                <img src="/images/about-features/mission.png" alt="Our Mission" className="absolute inset-0 w-full h-full object-cover opacity-30" />
+                <div className="relative z-10 p-10 flex flex-col items-center">
+                  <h3 className="text-4xl font-extrabold mb-6 text-white drop-shadow-lg">Our Mission</h3>
+                  <p className="text-2xl text-blue-100 leading-relaxed text-center font-medium drop-shadow-md">
                     To provide exceptional dental care through innovative treatments, compassionate service, and a commitment to helping every patient achieve optimal oral health and a confident smile.
                   </p>
-                </CardContent>
-              </Card>
-              <Card className="bg-gradient-to-br from-cyan-600 to-blue-600 text-white flex flex-col items-center">
-                <CardContent className="p-12 flex flex-col items-center">
-                  <img src="/images/about-features/vision.png" alt="Our Vision" className="w-44 h-44 mb-8 object-contain max-w-[176px] max-h-[176px]" />
-                  <h3 className="text-4xl font-extrabold mb-8">Our Vision</h3>
-                  <p className="text-2xl text-cyan-100 leading-relaxed text-center font-medium">
+                </div>
+              </div>
+              {/* Vision Card with background image */}
+              <div className="relative rounded-3xl overflow-hidden shadow-xl min-h-[400px] flex flex-col justify-end bg-cyan-700">
+                <img src="/images/about-features/vision.png" alt="Our Vision" className="absolute inset-0 w-full h-full object-cover opacity-30" />
+                <div className="relative z-10 p-10 flex flex-col items-center">
+                  <h3 className="text-4xl font-extrabold mb-6 text-white drop-shadow-lg">Our Vision</h3>
+                  <p className="text-2xl text-cyan-100 leading-relaxed text-center font-medium drop-shadow-md">
                     To be the leading dental practice in our community, known for excellence in patient care, advanced technology, and creating lasting relationships built on trust and outstanding results.
                   </p>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </div>
           </div>
         </section>
