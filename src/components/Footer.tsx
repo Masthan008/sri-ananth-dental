@@ -36,12 +36,12 @@ export const Footer = () => {
   ];
 
   const services = [
-    { name: "General Dentistry", href: "/services/general" },
-    { name: "Cosmetic Dentistry", href: "/services/cosmetic" },
+    { name: "General Dentistry", href: "/services/general-dentistry" },
+    { name: "Cosmetic Dentistry", href: "/services/cosmetic-dentistry" },
     { name: "Orthodontics", href: "/services/orthodontics" },
-    { name: "Emergency Care", href: "/services/emergency" },
-    { name: "Pediatric Care", href: "/services/pediatric" },
-    { name: "Implants", href: "/services/implants" }
+    { name: "Emergency Care", href: "/services/emergency-care" },
+    { name: "Pediatric Care", href: "/services/pediatric-dentistry" },
+    { name: "Restorative Dentistry", href: "/services/restorative-dentistry" }
   ];
 
   return (
@@ -101,6 +101,10 @@ export const Footer = () => {
                   <a
                     href={service.href}
                     className="text-gray-300 hover:text-blue-400 transition-colors duration-200 text-sm"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.location.href = service.href;
+                    }}
                   >
                     {service.name}
                   </a>

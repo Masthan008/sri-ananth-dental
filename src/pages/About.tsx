@@ -376,26 +376,72 @@ const About = () => {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-20">
-          <div className="container mx-auto px-4">
-            <div 
-              className="bg-blue-50 rounded-2xl p-8 md:p-12"
-              data-aos="fade-up"
-              data-aos-delay="100"
-            >
-              <div className="max-w-4xl mx-auto text-center">
-                <h2 className="text-3xl font-bold text-gray-900 mb-6">Why Choose Us?</h2>
-                <p className="text-lg text-gray-600 mb-8 feature-section">
-                  Experience the difference with our patient-centered approach and commitment to excellence in dental care.
+        {/* Why Choose Us Section with Image on Left */}
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              {/* Image on Left */}
+              <div className="relative" data-aos="fade-right">
+                <img 
+                  src="/images/why-choose-us.jpg" 
+                  alt="Why Choose Sri Ananth Dental Hospital" 
+                  className="rounded-2xl shadow-2xl w-full h-auto"
+                />
+                <div className="absolute -bottom-6 -right-6 bg-blue-600 text-white p-4 rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                  <div className="text-3xl font-bold">15+</div>
+                  <div className="text-sm">Years of Experience</div>
+                </div>
+              </div>
+              
+              {/* Content on Right */}
+              <div data-aos="fade-left">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                  Why Choose Sri Ananth Dental Hospital?
+                </h2>
+                <p className="text-lg text-gray-600 mb-8">
+                  We are committed to providing exceptional dental care with a personal touch. Here's what sets us apart:
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                
+                <div className="space-y-6">
+                  {[
+                    {
+                      icon: '👨‍⚕️',
+                      title: 'Expert Dental Team',
+                      description: 'Our experienced dentists and specialists are dedicated to providing the highest quality care.'
+                    },
+                    {
+                      icon: '🏥',
+                      title: 'Modern Facilities',
+                      description: 'Equipped with state-of-the-art technology for accurate diagnosis and effective treatment.'
+                    },
+                    {
+                      icon: '💯',
+                      title: 'Patient-Centered Care',
+                      description: 'We prioritize your comfort and satisfaction at every step of your dental journey.'
+                    },
+                    {
+                      icon: '💰',
+                      title: 'Affordable Options',
+                      description: 'Quality dental care that fits your budget with flexible payment plans available.'
+                    }
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-start space-x-4">
+                      <div className="flex-shrink-0 text-2xl">{item.icon}</div>
+                      <div>
+                        <h4 className="text-lg font-semibold text-gray-900">{item.title}</h4>
+                        <p className="text-gray-600">{item.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="mt-8">
                   <Button 
-                    onClick={() => navigate('/contact-us')}
+                    onClick={() => navigate('/contact')}
                     size="lg"
                     className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
                   >
-                    Schedule Your Visit
+                    Book Your Appointment
                   </Button>
                 </div>
               </div>
