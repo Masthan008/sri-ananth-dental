@@ -127,27 +127,37 @@ const About = () => {
 
         {/* Why Choose Us Section */}
         <section className="py-20 bg-gradient-to-b from-blue-50 to-white">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-blue-800 mb-4">Why Choose Us</h2>
               <h3 className="text-2xl font-semibold text-blue-700 mb-2">We Are Experienced In Making Smiles More Beautiful</h3>
             </div>
-            <div className="space-y-8">
-              <div>
-                <h4 className="text-xl font-bold text-blue-600 mb-1">Expert Care</h4>
-                <p className="text-gray-700">Dr. Gireesha i and her skilled team bring years of experience and expertise in general, cosmetic, and restorative dentistry.</p>
+            <div className="flex flex-col lg:flex-row items-center gap-12">
+              <div className="flex-1 space-y-8">
+                <div>
+                  <h4 className="text-xl font-bold text-blue-600 mb-1">Expert Care</h4>
+                  <p className="text-gray-700">Dr. Gireesha i and her skilled team bring years of experience and expertise in general, cosmetic, and restorative dentistry.</p>
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold text-blue-600 mb-1">Advanced Technology</h4>
+                  <p className="text-gray-700">We use state-of-the-art equipment and modern techniques to offer painless, precise, and effective treatments.</p>
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold text-blue-600 mb-1">Personalized Treatment Plans</h4>
+                  <p className="text-gray-700">Every smile is unique, and so is our approach. We customize treatments to meet your individual dental needs.</p>
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold text-blue-600 mb-1">Comfort & Care</h4>
+                  <p className="text-gray-700">Your comfort is our priority. Our clinic is designed to create a soothing, stress-free dental experience.</p>
+                </div>
               </div>
-              <div>
-                <h4 className="text-xl font-bold text-blue-600 mb-1">Advanced Technology</h4>
-                <p className="text-gray-700">We use state-of-the-art equipment and modern techniques to offer painless, precise, and effective treatments.</p>
-              </div>
-              <div>
-                <h4 className="text-xl font-bold text-blue-600 mb-1">Personalized Treatment Plans</h4>
-                <p className="text-gray-700">Every smile is unique, and so is our approach. We customize treatments to meet your individual dental needs.</p>
-              </div>
-              <div>
-                <h4 className="text-xl font-bold text-blue-600 mb-1">Comfort & Care</h4>
-                <p className="text-gray-700">Your comfort is our priority. Our clinic is designed to create a soothing, stress-free dental experience.</p>
+              <div className="flex-1 flex justify-center">
+                <img
+                  src="/images/hero/dental-chair-and-equipment-patie.jpg"
+                  alt="Dental Clinic Modern Equipment"
+                  className="rounded-2xl shadow-xl w-full max-w-md object-cover border-4 border-blue-200"
+                  loading="lazy"
+                />
               </div>
             </div>
           </div>
