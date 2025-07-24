@@ -48,25 +48,22 @@ const Index = () => {
       </div>
       {/* Our Doctors Section with Pure HTML/CSS/JS Slider */}
       <section className="doctor-slider-section py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-gray-900 text-center mb-10">Our Doctors</h2>
           <div className="slider-container relative">
             <button className="slide-btn prev" onClick={handlePrevDoctor}>&#x2039;</button>
-            <div className="slider-track flex gap-8 transition-transform duration-500 ease-out" style={{ transform: `translateX(-${currentDoctor * 340}px)` }}>
+            <div className="slider-track flex flex-col gap-8 transition-transform duration-500 ease-out" style={{ transform: `translateY(-${currentDoctor * 340}px)` }}>
               {doctors.map((doctor, idx) => (
-                <div className="doctor-card min-w-[320px] bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:scale-[1.02] transition-all duration-300 cursor-pointer overflow-hidden h-full flex flex-col" key={doctor.id}>
-                  <div className="relative overflow-hidden h-80 bg-gray-100">
-                    <img src={doctor.image} alt={doctor.name} className="w-full h-full object-contain transition-transform duration-500" style={{ objectPosition: 'center 30%' }} />
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="text-2xl font-bold text-blue-800 mb-1">{doctor.name}</h3>
-                    <p className="text-blue-600 text-lg mb-1">{doctor.title}</p>
-                    <div className="flex flex-wrap gap-2 mb-2">
-                      {doctor.specialties.map((specialty, idx) => (
-                        <span key={idx} className="bg-blue-50 text-blue-700 text-xs px-2.5 py-1 rounded">{specialty}</span>
-                      ))}
+                <div className="flex items-center bg-white min-h-[400px]" key={doctor.id}>
+                  <div className="flex-1 flex flex-col justify-center pl-16 pr-8">
+                    <h3 className="text-5xl font-extrabold text-gray-900 mb-4">{doctor.name}</h3>
+                    <p className="text-2xl font-semibold text-gray-700 mb-4">{doctor.title}</p>
+                    <div className="text-2xl text-gray-700 mb-4 whitespace-pre-line">
+                      {doctor.specialties.join(", ")}
                     </div>
-                    <p className="text-gray-500 text-sm mb-1">Experience: {doctor.experience}</p>
+                  </div>
+                  <div className="flex-shrink-0 flex items-center justify-center w-[420px] h-[420px]">
+                    <img src={doctor.image} alt={doctor.name} className="w-full h-full object-contain" />
                   </div>
                 </div>
               ))}
