@@ -85,20 +85,26 @@ const About = () => {
         <section className="py-20 bg-white">
           <div className="max-w-6xl mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center mb-12">
-              <div className="flex flex-col items-center bg-white rounded-2xl shadow-lg p-6 h-full" data-aos="fade-up" data-aos-delay="0">
-                <img src="/images/about-features/Dental Checkup.png" alt="Dental Checkup" className="mb-4 w-56 h-56 object-contain max-w-[224px] max-h-[224px]" />
-                <h3 className="text-xl font-extrabold text-gray-800 mb-2">Dental Checkup</h3>
-                <p className="text-base text-gray-700 font-medium mt-2">We proudly conduct free dental checkup camps every year for children and adults to serve the people who cannot afford regular checkups.</p>
+              <div className="relative rounded-2xl shadow-lg p-6 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="fade-up" data-aos-delay="0">
+                <img src="/images/about-features/Dental Checkup.png" alt="Dental Checkup" className="absolute inset-0 w-full h-full object-cover opacity-40" />
+                <div className="relative z-10 flex flex-col items-center">
+                  <h3 className="text-xl font-extrabold text-gray-900 mb-2 bg-white/80 px-3 py-1 rounded">Dental Checkup</h3>
+                  <p className="text-base text-gray-800 font-medium mt-2 bg-white/70 px-3 py-2 rounded">We proudly conduct free dental checkup camps every year for children and adults to serve the people who cannot afford regular checkups.</p>
+                </div>
               </div>
-              <div className="flex flex-col items-center bg-white rounded-2xl shadow-lg p-6 h-full" data-aos="fade-up" data-aos-delay="100">
-                <img src="/images/about-features/Qualified Doctors.png" alt="Qualified Doctors" className="mb-4 w-56 h-56 object-contain max-w-[224px] max-h-[224px]" />
-                <h3 className="text-xl font-extrabold text-gray-800 mb-2">Qualified Doctors</h3>
-                <p className="text-base text-gray-700 font-medium mt-2">We have a team of experienced and best dentist in Hyderabad who works with full dedication to serve our patients better.</p>
+              <div className="relative rounded-2xl shadow-lg p-6 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                <img src="/images/about-features/Qualified Doctors.png" alt="Qualified Doctors" className="absolute inset-0 w-full h-full object-cover opacity-40" />
+                <div className="relative z-10 flex flex-col items-center">
+                  <h3 className="text-xl font-extrabold text-gray-900 mb-2 bg-white/80 px-3 py-1 rounded">Qualified Doctors</h3>
+                  <p className="text-base text-gray-800 font-medium mt-2 bg-white/70 px-3 py-2 rounded">We have a team of experienced and best dentist in Hyderabad who works with full dedication to serve our patients better.</p>
+                </div>
               </div>
-              <div className="flex flex-col items-center bg-white rounded-2xl shadow-lg p-6 h-full" data-aos="fade-up" data-aos-delay="200">
-                <img src="/images/about-features/Emergency Services.png" alt="Emergency Services" className="mb-4 w-56 h-56 object-contain max-w-[224px] max-h-[224px]" />
-                <h3 className="text-xl font-extrabold text-gray-800 mb-2">Emergency Services</h3>
-                <p className="text-base text-gray-700 font-medium mt-2">Fort Dental Clinic in Tolichowki, Hyderabad provides emergency services to patients at any time required.</p>
+              <div className="relative rounded-2xl shadow-lg p-6 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                <img src="/images/about-features/Emergency Services.png" alt="Emergency Services" className="absolute inset-0 w-full h-full object-cover opacity-40" />
+                <div className="relative z-10 flex flex-col items-center">
+                  <h3 className="text-xl font-extrabold text-gray-900 mb-2 bg-white/80 px-3 py-1 rounded">Emergency Services</h3>
+                  <p className="text-base text-gray-800 font-medium mt-2 bg-white/70 px-3 py-2 rounded">Fort Dental Clinic in Tolichowki, Hyderabad provides emergency services to patients at any time required.</p>
+                </div>
               </div>
             </div>
           </div>
@@ -116,25 +122,33 @@ const About = () => {
                 In dental and oral surgery, lighting in the operating theatre plays a crucial role in ensuring optimal visibility and precision during procedures. Here are some key considerations regarding lighting in a dental operating theatre:
               </p>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-10">
-                <li className="flex flex-col items-center bg-white rounded-2xl shadow-lg p-8 h-full" data-aos="fade-up" data-aos-delay="0">
-                  <img src="/images/about-features/Sterile Environment.png" alt="Sterile Environment" className="mb-4 w-52 h-52 object-contain max-w-[208px] max-h-[208px]" />
-                  <strong className="block text-xl text-blue-700 mb-2">Sterile Environment</strong>
-                  <span className="text-base text-gray-700 font-medium mt-2">Our operating theatres are maintained with the highest standards of sterility to ensure patient safety and infection control.</span>
+                <li className="relative rounded-2xl shadow-lg p-8 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="fade-up" data-aos-delay="0">
+                  <img src="/images/about-features/Sterile Environment.png" alt="Sterile Environment" className="absolute inset-0 w-full h-full object-cover opacity-40" />
+                  <div className="relative z-10 flex flex-col items-center">
+                    <strong className="block text-xl text-blue-900 mb-2 bg-white/80 px-3 py-1 rounded">Sterile Environment</strong>
+                    <span className="text-base text-gray-800 font-medium mt-2 bg-white/70 px-3 py-2 rounded">Our operating theatres are maintained with the highest standards of sterility to ensure patient safety and infection control.</span>
+                  </div>
                 </li>
-                <li className="flex flex-col items-center bg-white rounded-2xl shadow-lg p-8 h-full" data-aos="fade-up" data-aos-delay="100">
-                  <img src="/images/about-features/Anesthesia Options.png" alt="Anesthesia Options" className="mb-4 w-52 h-52 object-contain max-w-[208px] max-h-[208px]" />
-                  <strong className="block text-xl text-blue-700 mb-2">Anesthesia Options</strong>
-                  <span className="text-base text-gray-700 font-medium mt-2">We offer a range of anesthesia options for patient comfort during complex dental procedures.</span>
+                <li className="relative rounded-2xl shadow-lg p-8 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                  <img src="/images/about-features/Anesthesia Options.png" alt="Anesthesia Options" className="absolute inset-0 w-full h-full object-cover opacity-40" />
+                  <div className="relative z-10 flex flex-col items-center">
+                    <strong className="block text-xl text-blue-900 mb-2 bg-white/80 px-3 py-1 rounded">Anesthesia Options</strong>
+                    <span className="text-base text-gray-800 font-medium mt-2 bg-white/70 px-3 py-2 rounded">We offer a range of anesthesia options for patient comfort during complex dental procedures.</span>
+                  </div>
                 </li>
-                <li className="flex flex-col items-center bg-white rounded-2xl shadow-lg p-8 h-full" data-aos="fade-up" data-aos-delay="200">
-                  <img src="/images/about-features/Ease of Adjustment.png" alt="Ease of Adjustment" className="mb-4 w-52 h-52 object-contain max-w-[208px] max-h-[208px]" />
-                  <strong className="block text-xl text-blue-700 mb-2">Ease of Adjustment</strong>
-                  <span className="text-base text-gray-700 font-medium mt-2">Our equipment and lighting are fully adjustable for optimal access and visibility during every procedure.</span>
+                <li className="relative rounded-2xl shadow-lg p-8 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                  <img src="/images/about-features/Ease of Adjustment.png" alt="Ease of Adjustment" className="absolute inset-0 w-full h-full object-cover opacity-40" />
+                  <div className="relative z-10 flex flex-col items-center">
+                    <strong className="block text-xl text-blue-900 mb-2 bg-white/80 px-3 py-1 rounded">Ease of Adjustment</strong>
+                    <span className="text-base text-gray-800 font-medium mt-2 bg-white/70 px-3 py-2 rounded">Our equipment and lighting are fully adjustable for optimal access and visibility during every procedure.</span>
+                  </div>
                 </li>
-                <li className="flex flex-col items-center bg-white rounded-2xl shadow-lg p-8 h-full" data-aos="fade-up" data-aos-delay="300">
-                  <img src="/images/about-features/Infection Control.png" alt="Infection Control" className="mb-4 w-52 h-52 object-contain max-w-[208px] max-h-[208px]" />
-                  <strong className="block text-xl text-blue-700 mb-2">Infection Control</strong>
-                  <span className="text-base text-gray-700 font-medium mt-2">Strict infection control protocols are followed to protect both patients and staff at every step.</span>
+                <li className="relative rounded-2xl shadow-lg p-8 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                  <img src="/images/about-features/Infection Control.png" alt="Infection Control" className="absolute inset-0 w-full h-full object-cover opacity-40" />
+                  <div className="relative z-10 flex flex-col items-center">
+                    <strong className="block text-xl text-blue-900 mb-2 bg-white/80 px-3 py-1 rounded">Infection Control</strong>
+                    <span className="text-base text-gray-800 font-medium mt-2 bg-white/70 px-3 py-2 rounded">Strict infection control protocols are followed to protect both patients and staff at every step.</span>
+                  </div>
                 </li>
               </ul>
             </div>
