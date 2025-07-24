@@ -8,7 +8,7 @@ import { Award, Users, Heart, Shield, Play, Star, CheckCircle } from "lucide-rea
 import { useNavigate } from "react-router-dom";
 import { HeroSection } from "@/components/HeroSection";
 import { useTranslation } from 'react-i18next';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -39,6 +39,17 @@ const About = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   useEffect(() => { AOS.init({ once: true }); }, []);
+  // Animation state for feature cards
+  const [featureActive, setFeatureActive] = useState([false, false, false]);
+  const [fourActive, setFourActive] = useState([false, false, false, false]);
+
+  const handleFeatureClick = idx => {
+    setFeatureActive(arr => arr.map((v, i) => i === idx ? !v : v));
+  };
+  const handleFourClick = idx => {
+    setFourActive(arr => arr.map((v, i) => i === idx ? !v : v));
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -85,27 +96,37 @@ const About = () => {
         <section className="py-20 bg-white">
           <div className="max-w-6xl mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center mb-12">
-              <div className="relative rounded-2xl shadow-lg p-6 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="zoom-in-up" data-aos-delay="0">
-                <img src="/images/about-features/Dental Checkup.png" alt="Dental Checkup" className="absolute inset-0 w-full h-full object-cover opacity-40" />
-                <div className="relative z-10 flex flex-col items-center">
-                  <h3 className="text-xl font-extrabold text-gray-900 mb-2 bg-white/80 px-3 py-1 rounded">Dental Checkup</h3>
-                  <p className="text-base text-gray-800 font-medium mt-2 bg-white/70 px-3 py-2 rounded">We proudly conduct free dental checkup camps every year for children and adults to serve the people who cannot afford regular checkups.</p>
+              {[
+                {
+                  img: "/images/about-features/Dental Checkup.png",
+                  title: "Dental Checkup",
+                  desc: "We proudly conduct free dental checkup camps every year for children and adults to serve the people who cannot afford regular checkups."
+                },
+                {
+                  img: "/images/about-features/Qualified Doctors.png",
+                  title: "Qualified Doctors",
+                  desc: "We have a team of experienced and best dentist in Hyderabad who works with full dedication to serve our patients better."
+                },
+                {
+                  img: "/images/about-features/Emergency Services.png",
+                  title: "Emergency Services",
+                  desc: "Fort Dental Clinic in Tolichowki, Hyderabad provides emergency services to patients at any time required."
+                }
+              ].map((item, idx) => (
+                <div
+                  key={item.title}
+                  className={`relative rounded-2xl shadow-lg p-6 h-[340px] flex flex-col justify-end items-center overflow-hidden cursor-pointer transition-all duration-500 ${featureActive[idx] ? 'grayscale-0 brightness-50' : 'grayscale-0 brightness-100'}`}
+                  data-aos={idx === 0 ? "zoom-in-up" : idx === 1 ? "flip-left" : "zoom-in-down"}
+                  data-aos-delay={idx * 100}
+                  onClick={() => handleFeatureClick(idx)}
+                >
+                  <img src={item.img} alt={item.title} className={`absolute inset-0 w-full h-full object-cover opacity-40 transition-all duration-500 ${featureActive[idx] ? 'grayscale brightness-50' : ''}`} />
+                  <div className="relative z-10 flex flex-col items-center">
+                    <h3 className="text-xl font-extrabold text-gray-900 mb-2 bg-white/80 px-3 py-1 rounded">{item.title}</h3>
+                    <p className="text-base text-gray-800 font-medium mt-2 bg-white/70 px-3 py-2 rounded">{item.desc}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="relative rounded-2xl shadow-lg p-6 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="flip-left" data-aos-delay="100">
-                <img src="/images/about-features/Qualified Doctors.png" alt="Qualified Doctors" className="absolute inset-0 w-full h-full object-cover opacity-40" />
-                <div className="relative z-10 flex flex-col items-center">
-                  <h3 className="text-xl font-extrabold text-gray-900 mb-2 bg-white/80 px-3 py-1 rounded">Qualified Doctors</h3>
-                  <p className="text-base text-gray-800 font-medium mt-2 bg-white/70 px-3 py-2 rounded">We have a team of experienced and best dentist in Hyderabad who works with full dedication to serve our patients better.</p>
-                </div>
-              </div>
-              <div className="relative rounded-2xl shadow-lg p-6 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="zoom-in-down" data-aos-delay="200">
-                <img src="/images/about-features/Emergency Services.png" alt="Emergency Services" className="absolute inset-0 w-full h-full object-cover opacity-40" />
-                <div className="relative z-10 flex flex-col items-center">
-                  <h3 className="text-xl font-extrabold text-gray-900 mb-2 bg-white/80 px-3 py-1 rounded">Emergency Services</h3>
-                  <p className="text-base text-gray-800 font-medium mt-2 bg-white/70 px-3 py-2 rounded">Fort Dental Clinic in Tolichowki, Hyderabad provides emergency services to patients at any time required.</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
@@ -122,34 +143,42 @@ const About = () => {
                 In dental and oral surgery, lighting in the operating theatre plays a crucial role in ensuring optimal visibility and precision during procedures. Here are some key considerations regarding lighting in a dental operating theatre:
               </p>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-10">
-                <li className="relative rounded-2xl shadow-lg p-8 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="zoom-in-up" data-aos-delay="0">
-                  <img src="/images/about-features/Sterile Environment.png" alt="Sterile Environment" className="absolute inset-0 w-full h-full object-cover opacity-40" />
-                  <div className="relative z-10 flex flex-col items-center">
-                    <strong className="block text-xl text-blue-900 mb-2 bg-white/80 px-3 py-1 rounded">Sterile Environment</strong>
-                    <span className="text-base text-gray-800 font-medium mt-2 bg-white/70 px-3 py-2 rounded">Our operating theatres are maintained with the highest standards of sterility to ensure patient safety and infection control.</span>
-                  </div>
-                </li>
-                <li className="relative rounded-2xl shadow-lg p-8 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="flip-left" data-aos-delay="100">
-                  <img src="/images/about-features/Anesthesia Options.png" alt="Anesthesia Options" className="absolute inset-0 w-full h-full object-cover opacity-40" />
-                  <div className="relative z-10 flex flex-col items-center">
-                    <strong className="block text-xl text-blue-900 mb-2 bg-white/80 px-3 py-1 rounded">Anesthesia Options</strong>
-                    <span className="text-base text-gray-800 font-medium mt-2 bg-white/70 px-3 py-2 rounded">We offer a range of anesthesia options for patient comfort during complex dental procedures.</span>
-                  </div>
-                </li>
-                <li className="relative rounded-2xl shadow-lg p-8 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="zoom-in-down" data-aos-delay="200">
-                  <img src="/images/about-features/Ease of Adjustment.png" alt="Ease of Adjustment" className="absolute inset-0 w-full h-full object-cover opacity-40" />
-                  <div className="relative z-10 flex flex-col items-center">
-                    <strong className="block text-xl text-blue-900 mb-2 bg-white/80 px-3 py-1 rounded">Ease of Adjustment</strong>
-                    <span className="text-base text-gray-800 font-medium mt-2 bg-white/70 px-3 py-2 rounded">Our equipment and lighting are fully adjustable for optimal access and visibility during every procedure.</span>
-                  </div>
-                </li>
-                <li className="relative rounded-2xl shadow-lg p-8 h-[340px] flex flex-col justify-end items-center overflow-hidden" data-aos="flip-right" data-aos-delay="300">
-                  <img src="/images/about-features/Infection Control.png" alt="Infection Control" className="absolute inset-0 w-full h-full object-cover opacity-40" />
-                  <div className="relative z-10 flex flex-col items-center">
-                    <strong className="block text-xl text-blue-900 mb-2 bg-white/80 px-3 py-1 rounded">Infection Control</strong>
-                    <span className="text-base text-gray-800 font-medium mt-2 bg-white/70 px-3 py-2 rounded">Strict infection control protocols are followed to protect both patients and staff at every step.</span>
-                  </div>
-                </li>
+                {[
+                  {
+                    img: "/images/about-features/Sterile Environment.png",
+                    title: "Sterile Environment",
+                    desc: "Our operating theatres are maintained with the highest standards of sterility to ensure patient safety and infection control."
+                  },
+                  {
+                    img: "/images/about-features/Anesthesia Options.png",
+                    title: "Anesthesia Options",
+                    desc: "We offer a range of anesthesia options for patient comfort during complex dental procedures."
+                  },
+                  {
+                    img: "/images/about-features/Ease of Adjustment.png",
+                    title: "Ease of Adjustment",
+                    desc: "Our equipment and lighting are fully adjustable for optimal access and visibility during every procedure."
+                  },
+                  {
+                    img: "/images/about-features/Infection Control.png",
+                    title: "Infection Control",
+                    desc: "Strict infection control protocols are followed to protect both patients and staff at every step."
+                  }
+                ].map((item, idx) => (
+                  <li
+                    key={item.title}
+                    className={`relative rounded-2xl shadow-lg p-8 h-[340px] flex flex-col justify-end items-center overflow-hidden cursor-pointer transition-all duration-500 ${fourActive[idx] ? 'grayscale-0 brightness-50' : 'grayscale-0 brightness-100'}`}
+                    data-aos={idx === 0 ? "zoom-in-up" : idx === 1 ? "flip-left" : idx === 2 ? "zoom-in-down" : "flip-right"}
+                    data-aos-delay={idx * 100}
+                    onClick={() => handleFourClick(idx)}
+                  >
+                    <img src={item.img} alt={item.title} className={`absolute inset-0 w-full h-full object-cover opacity-40 transition-all duration-500 ${fourActive[idx] ? 'grayscale brightness-50' : ''}`} />
+                    <div className="relative z-10 flex flex-col items-center">
+                      <strong className="block text-xl text-blue-900 mb-2 bg-white/80 px-3 py-1 rounded">{item.title}</strong>
+                      <span className="text-base text-gray-800 font-medium mt-2 bg-white/70 px-3 py-2 rounded">{item.desc}</span>
+                    </div>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
