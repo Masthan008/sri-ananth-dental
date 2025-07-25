@@ -48,7 +48,8 @@ const Contact = () => {
       details: [
         { label: "Clinic", value: "Sri Ananth Dental Hospital" },
         { label: "Address", value: "Indira bai colony road, Alampally" },
-        { label: "City", value: "Vikarabad, Telangana 501101" }
+        { label: "City", value: "Vikarabad, Telangana 501101" },
+        { label: "Landmark", value: "Near RTC Complex" }
       ],
       color: "from-blue-500 to-cyan-500"
     },
@@ -168,173 +169,39 @@ const Contact = () => {
           </div>
         </section>
 
-        {/* Contact Form & Map */}
-        <section className="py-20 bg-gradient-to-b from-blue-50 to-white">
+        {/* Map Section */}
+        <section className="py-16 bg-gradient-to-b from-blue-50 to-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-12">
-              {/* Contact Form */}
-              <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">Send us a Message</h2>
-                <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
-                  <div 
-                    className="md:w-1/2 p-8"
-                    data-aos="fade-left"
-                    data-aos-delay="200"
-                  >
-                    <form className="space-y-6">
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            First Name *
-                          </label>
-                          <Input 
-                            placeholder="John" 
-                            className="rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Last Name *
-                          </label>
-                          <Input 
-                            placeholder="Doe" 
-                            className="rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Email *
-                          </label>
-                          <Input 
-                            type="email" 
-                            placeholder="john@example.com" 
-                            className="rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Phone
-                          </label>
-                          <Input 
-                            type="tel" 
-                            placeholder="+1 (555) 123-4567" 
-                            className="rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500"
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Subject *
-                        </label>
-                        <select className="w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 px-4 py-2">
-                          <option>General Question</option>
-                          <option>Appointment Request</option>
-                          <option>Insurance Inquiry</option>
-                          <option>Treatment Information</option>
-                          <option>Emergency</option>
-                          <option>Billing Question</option>
-                          <option>Other</option>
-                        </select>
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Message *
-                        </label>
-                        <Textarea 
-                          placeholder="Tell us how we can help you..." 
-                          rows={5}
-                          className="rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500"
-                        />
-                      </div>
-
-                      <div className="flex items-center space-x-2">
-                        <input type="checkbox" id="newsletter" className="rounded" />
-                        <label htmlFor="newsletter" className="text-sm text-gray-600">
-                          I'd like to receive dental health tips and news
-                        </label>
-                      </div>
-
-                      <Button 
-                        type="submit"
-                        className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-3 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105"
-                      >
-                        Send Message
-                      </Button>
-                    </form>
-                  </div>
-                </Card>
+            <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">Our Location</h2>
+            <div className="bg-white/80 backdrop-blur-sm border-0 shadow-lg rounded-2xl overflow-hidden">
+              <div className="h-96 w-full">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3808.765432109375!2d77.9125!3d17.3364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb8d4f1a1a1a1b%3A0x1a1a1a1a1a1a1a1a!2sIndira%20Bai%20Colony%20Road%2C%20Alampally%2C%20Vikarabad%2C%20Telangana%20501101!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" 
+                  width="100%" 
+                  height="100%" 
+                  style={{ border: 0 }} 
+                  allowFullScreen 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Sri Ananth Dental Hospital Location"
+                ></iframe>
               </div>
-
-              {/* Map & Directions */}
-              <div className="space-y-8">
-                <div>
-                  <h2 className="text-3xl font-bold text-gray-900 mb-8">Find Us</h2>
-                  <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg overflow-hidden">
-                    <CardContent className="p-0">
-                      <div className="h-64 bg-gradient-to-br from-blue-100 to-cyan-100 flex items-center justify-center">
-                        <Card className="border-0 shadow-xl overflow-hidden">
-                          <div className="md:flex">
-                            <div 
-                              className="md:w-1/2 bg-blue-50 p-8"
-                              data-aos="fade-right"
-                              data-aos-delay="200"
-                            >
-                              <h3 className="text-2xl font-semibold text-gray-900 mb-6">Contact Information</h3>
-                              <p className="text-gray-600">Google Maps integration will be embedded here</p>
-                              <Button 
-                                className="mt-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
-                                onClick={() => window.open('https://maps.google.com', '_blank')}
-                              >
-                                Get Directions
-                              </Button>
-                            </div>
-                            <div 
-                              className="md:w-1/2 bg-gray-100 p-8"
-                              data-aos="fade-left"
-                              data-aos-delay="200"
-                            >
-                              <h3 className="text-2xl font-semibold text-gray-900 mb-6">Office Location</h3>
-                              <p className="text-gray-600">123 Dental Street, Downtown, ST 12345</p>
-                            </div>
-                          </div>
-                        </Card>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-6">How to Get Here</h3>
-                  <div className="space-y-4">
-                    {directions.map((direction, index) => (
-                      <Card key={index} className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
-                        <CardContent className="p-6">
-                          <div className="flex items-start space-x-4">
-                            <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full flex items-center justify-center flex-shrink-0">
-                              <direction.icon className="h-6 w-6 text-white" />
-                            </div>
-                            <div>
-                              <h4 className="font-semibold text-gray-900 mb-2">{direction.title}</h4>
-                              <p className="text-gray-600 text-sm mb-3">{direction.description}</p>
-                              <ul className="space-y-1">
-                                {direction.details.map((detail, idx) => (
-                                  <li key={idx} className="flex items-center text-sm text-gray-700">
-                                    <CheckCircle className="h-3 w-3 text-green-500 mr-2" />
-                                    {detail}
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
+              <div className="p-6 bg-white">
+                <div className="flex flex-col md:flex-row justify-between items-center">
+                  <div className="mb-4 md:mb-0">
+                    <h3 className="text-xl font-semibold text-gray-900">Sri Ananth Dental Hospital</h3>
+                    <p className="text-gray-600">Indira bai colony road, Alampally</p>
+                    <p className="text-gray-600">Vikarabad, Telangana 501101</p>
+                    <p className="text-gray-600">Landmark: Near RTC Complex</p>
                   </div>
+                  <a 
+                    href="https://maps.google.com?q=Sri+Ananth+Dental+Hospital,Vikarabad" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200"
+                  >
+                    Get Directions
+                  </a>
                 </div>
               </div>
             </div>
