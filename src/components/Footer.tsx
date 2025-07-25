@@ -39,9 +39,13 @@ export const Footer = () => {
     { name: "General Dentistry", href: "/services/general-dentistry" },
     { name: "Cosmetic Dentistry", href: "/services/cosmetic-dentistry" },
     { name: "Orthodontics", href: "/services/orthodontics" },
-    { name: "Emergency Care", href: "/services/emergency-care" },
-    { name: "Pediatric Care", href: "/services/pediatric-dentistry" },
-    { name: "Restorative Dentistry", href: "/services/restorative-dentistry" }
+    { name: "Pediatric Dentistry", href: "/services/pediatric-dentistry" },
+    { name: "Periodontics", href: "/services/periodontics" },
+    { name: "Dental Checkup", href: "/services/dental-checkup" },
+    { name: "Dental Fillings", href: "/services/dental-fillings" },
+    { name: "Dental Implants", href: "/services/dental-implants" },
+    { name: "Dental Restoration", href: "/services/dental-restoration" },
+    { name: "Dental Veneers", href: "/services/dental-veneers" }
   ];
 
   return (
@@ -148,14 +152,14 @@ export const Footer = () => {
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-blue-400 flex-shrink-0" />
                 <div className="text-sm text-gray-300">
-                  <p>+91 94944 44027</p>
-                  <p>+91 8499995554</p>
+                  <p>+91 99661 51626</p>
+                  <p>+91 84999 95552 (Emergency)</p>
                   <p className="text-blue-300">Available 24/7</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-blue-400 flex-shrink-0" />
-                <p className="text-sm text-gray-300">dental@sriananthhospital.com</p>
+                <p className="text-sm text-gray-300">ananthdentalhospital@gmail.com</p>
               </div>
               <div className="flex items-start space-x-3">
                 <Clock className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />

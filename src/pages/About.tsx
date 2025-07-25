@@ -19,7 +19,7 @@ gsap.registerPlugin(ScrollTrigger);
 const achievements = [
   {
     icon: Award,
-    title: 'Best Dental Clinic 2022',
+    title: 'best dental hospital in vikarabad',
     description: 'Recognized for outstanding patient care and advanced dental technology.'
   },
   {

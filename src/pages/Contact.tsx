@@ -37,9 +37,8 @@ const Contact = () => {
       icon: Phone,
       title: "Phone Numbers",
       details: [
-        { label: "Main Office", value: "+91 94944 44027" },
-        { label: "Secondary", value: "+91 84999 95554" },
-        { label: "Emergency Line", value: "+91 94944 44027" }
+        { label: "Main Office", value: "+91 99661 51626" },
+        { label: "Emergency Line", value: "+91 84999 95552" }
       ],
       color: "from-green-500 to-emerald-500"
     },
@@ -66,9 +65,9 @@ const Contact = () => {
       icon: Mail,
       title: "Email Addresses",
       details: [
-        { label: "General Info", value: "dental@sriananthhospital.com" },
-        { label: "Appointments", value: "dental@sriananthhospital.com" },
-        { label: "Billing", value: "dental@sriananthhospital.com" }
+        { label: "General Inquiries", value: "ananthdentalhospital@gmail.com" },
+        { label: "Appointments", value: "ananthdentalhospital@gmail.com" },
+        { label: "Billing", value: "ananthdentalhospital@gmail.com" }
       ],
       color: "from-orange-500 to-red-500"
     }
@@ -377,7 +376,7 @@ const Contact = () => {
                   <Mail className="h-12 w-12 mx-auto mb-4" />
                   <h3 className="text-xl font-bold mb-2">Email Us</h3>
                   <p className="text-blue-100 mb-4">Send us a detailed message</p>
-                  <p className="font-semibold">sriananthdentalhospital@gmail.com</p>
+                  <p className="font-semibold">ananthdentalhospital@gmail.com</p>
                 </CardContent>
               </Card>
               

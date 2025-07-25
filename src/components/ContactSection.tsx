@@ -16,19 +16,19 @@ export const ContactSection = () => {
     {
       icon: MapPin,
       title: "Visit Us",
-      details: ["Sri Ananth Dental Hospital", "Near RTC Complex", "Kurnool, Andhra Pradesh - 518001"],
+      details: ["Sri Ananth Dental Hospital", "Indira bai colony road, Alampally", "Vikarabad, Telangana 501101"],
       color: "from-blue-500 to-cyan-500"
     },
     {
       icon: Clock,
       title: "Office Hours",
-      details: ["Mon-Sat: 8:00 AM - 9:00 PM", "Sun: 10:00 AM - 4:00 PM"],
+      details: ["Mon-Sun: 8:00 AM - 9:00 PM", "Emergency: 24/7"],
       color: "from-purple-500 to-pink-500"
     },
     {
       icon: Mail,
       title: "Email Us",
-      details: ["sriananthdentalhospital@gmail.com"],
+      details: ["ananthdentalhospital@gmail.com"],
       color: "from-orange-500 to-red-500"
     }
   ];
