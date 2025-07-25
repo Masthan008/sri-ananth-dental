@@ -8,13 +8,37 @@ import { Award, Users, Heart, Shield, Play, Star, CheckCircle } from "lucide-rea
 import { useNavigate } from "react-router-dom";
 import { HeroSection } from "@/components/HeroSection";
 import { useTranslation } from 'react-i18next';
-import { useEffect, useRef } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import gsap from 'gsap';
+import React, { useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+import { FaTooth, FaUserMd, FaCalendarCheck, FaAward, FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock } from 'react-icons/fa';
+import { FaHandHoldingHeart, FaTeeth, FaTeethOpen, FaToothbrush } from 'react-icons/fa6';
+import { GiTooth } from 'react-icons/gi';
+import { initAnimations } from '../utils/animations';
 
-gsap.registerPlugin(ScrollTrigger);
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger, useGSAP);
+
+// Type definitions
+interface FeatureCardProps {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface StatItemProps {
+  number: string;
+  label: string;
+  suffix?: string;
+}
+
+interface ServiceCardProps {
+  img: string;
+  title: string;
+  desc: string;
+}
 
 const achievements = [
   {
@@ -40,104 +64,263 @@ const achievements = [
 ];
 
 const About = () => {
-  const navigate = useNavigate();
   const { t } = useTranslation();
-  const imageRefs = useRef<Array<HTMLImageElement | null>>([]);
-  const sectionRefs = useRef<Array<HTMLElement | null>>([]);
+  const navigate = useNavigate();
+  const aboutRef = useRef<HTMLDivElement>(null);
+  const pageRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => { 
-    AOS.init({ once: true });
+  // Initialize and clean up animations
+  useEffect(() => {
+    // Force ScrollTrigger to refresh to pick up new elements
+    ScrollTrigger.refresh();
     
-    // Initialize GSAP animations
-    gsap.utils.toArray('.animate-img').forEach((img: any, i) => {
-      gsap.fromTo(img,
-        { 
-          opacity: 0,
-          y: 50,
-          scale: 0.9,
-        },
-        { 
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.8,
-          delay: i * 0.1,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: img,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-            once: true
-          },
-          onComplete: () => {
-            // Add hover effect after initial animation
-            img.addEventListener('mouseenter', () => {
-              gsap.to(img, { 
-                scale: 1.03, 
-                duration: 0.3,
-                boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)'
-              });
-            });
-            img.addEventListener('mouseleave', () => {
-              gsap.to(img, { 
-                scale: 1, 
-                duration: 0.3,
-                boxShadow: 'none'
-              });
-            });
-          }
-        }
-      );
-    });
-
-    // Animate feature sections
-    gsap.utils.toArray('.feature-section').forEach((section: any, i) => {
-      gsap.fromTo(section,
-        { 
-          opacity: 0,
-          y: 30,
-        },
-        { 
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          delay: i * 0.2,
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 80%',
-            toggleActions: 'play none none none',
-            once: true
-          }
-        }
-      );
-    });
-
     return () => {
-      // Cleanup
-      imageRefs.current = [];
-      sectionRefs.current = [];
+      // Clean up all GSAP animations and ScrollTrigger instances
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      gsap.killTweensOf('*');
     };
   }, []);
 
+  useGSAP(() => {
+    // Make sure aboutRef.current exists before initializing animations
+    if (!aboutRef.current) return;
+    
+    const animations = initAnimations(aboutRef.current);
+    
+    // Hero section
+    animations.fadeInUp('.hero-content', 0.2);
+    animations.fadeInUp('.hero-image', 0.4);
+    
+    // Quick links
+    animations.staggerChildren('.quick-links', '.quick-link', 0.1);
+    
+    // About section
+    animations.fadeInLeft('.about-image', 0.2);
+    animations.fadeInRight('.about-content', 0.4);
+    
+    // Features
+    animations.staggerChildren('.features-grid', '.feature-card', 0.1);
+    
+    // Stats
+    animations.fadeInUp('.stats-container', 0.2);
+    
+    // Team animations
+    animations.fadeInUp('.team-section', 0.2);
+    animations.staggerChildren('.team-grid', '.team-member', 0.1);
+    
+    // Testimonials animations
+    animations.fadeInUp('.testimonials-section', 0.2);
+    animations.staggerChildren('.testimonials-grid', '.testimonial', 0.1);
+
+    // Animate counter elements
+    document.querySelectorAll('.stat-number').forEach((stat) => {
+      const value = parseInt(stat.textContent || '0');
+      const suffix = stat.getAttribute('data-suffix') || '';
+      if (value > 0) {
+        animations.animateCounter(stat, value, suffix);
+      }
+    });
+
+    // Animate hero section elements
+    gsap.from('.hero-content > *', {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.15,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.hero-content',
+        start: 'top 80%',
+        toggleActions: 'play none none none',
+      }
+    });
+
+    // Animate quick links
+    gsap.utils.toArray('.quick-link').forEach((link: any, i) => {
+      gsap.from(link, {
+        x: i % 2 === 0 ? -30 : 30,
+        opacity: 0,
+        duration: 0.6,
+        delay: i * 0.1,
+        ease: 'back.out(1.7)',
+        scrollTrigger: {
+          trigger: link,
+          start: 'top 90%',
+          toggleActions: 'play none none none',
+        },
+        onComplete: () => {
+          link.addEventListener('mouseenter', () => {
+            gsap.to(link, {
+              y: -3,
+              boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+              duration: 0.3,
+              ease: 'power2.out'
+            });
+          });
+          link.addEventListener('mouseleave', () => {
+            gsap.to(link, {
+              y: 0,
+              boxShadow: 'none',
+              duration: 0.3,
+              ease: 'power2.in'
+            });
+          });
+        }
+      });
+    });
+
+    // Animate feature cards with 3D tilt effect
+    gsap.utils.toArray('.feature-card').forEach((card: any, i) => {
+      // Initial animation
+      gsap.from(card, {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        delay: i * 0.15,
+        ease: 'back.out(1.7)',
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        }
+      });
+
+      // Add 3D tilt effect on mouse move
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateY = ((x - centerX) / centerX) * 10;
+        const rotateX = ((centerY - y) / centerY) * 10;
+        
+        gsap.to(card, {
+          rotateX: rotateX,
+          rotateY: rotateY,
+          transformPerspective: 800,
+          transformOrigin: 'center center',
+          ease: 'power1.out',
+          duration: 0.5
+        });
+      });
+
+      // Reset on mouse leave
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, {
+          rotateX: 0,
+          rotateY: 0,
+          duration: 0.5,
+          ease: 'elastic.out(1, 0.5)'
+        });
+      });
+    });
+
+    // Animate stats with counting effect
+    document.querySelectorAll('.stat-item').forEach((stat: Element) => {
+      const numberElement = stat.querySelector('.stat-number');
+      if (!numberElement) return;
+      
+      const suffix = numberElement.getAttribute('data-suffix') || '';
+      const target = parseFloat(numberElement.textContent || '0');
+      let current = 0;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const duration = 2;
+            const increment = target / (duration * 60); // 60fps
+            
+            const updateCounter = () => {
+              current += increment;
+              if (current < target) {
+                numberElement.textContent = Math.round(current) + suffix;
+                requestAnimationFrame(updateCounter);
+              } else {
+                numberElement.textContent = target + suffix;
+              }
+            };
+            
+            updateCounter();
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+
+      observer.observe(stat);
+    });
+
+    // Animate image reveals with clip-path
+    gsap.utils.toArray('.img-reveal').forEach((img: any) => {
+      gsap.from(img, {
+        clipPath: 'inset(0 100% 0 0)',
+        duration: 1.5,
+        ease: 'power3.inOut',
+        scrollTrigger: {
+          trigger: img,
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        }
+      });
+    });
+
+    // Animate section headings with character reveal
+    document.querySelectorAll('.section-heading').forEach((heading: Element) => {
+      const text = heading.textContent || '';
+      heading.textContent = '';
+      
+      text.split('').forEach((char: string, i: number) => {
+        const span = document.createElement('span');
+        span.textContent = char === ' ' ? '\u00A0' : char;
+        span.style.display = 'inline-block';
+        span.style.opacity = '0';
+        span.style.transform = 'translateY(20px)';
+        heading.appendChild(span);
+        
+        gsap.to(span, {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          delay: i * 0.03,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: heading,
+            start: 'top 90%',
+            toggleActions: 'play none none none'
+          }
+        });
+      });
+    });
+  }, { scope: aboutRef });
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white" ref={pageRef}>
       <Header />
       <HeroSection
-        title={t('about.heroTitle', 'About Our Practice')}
-        subtitle={t('about.heroSubtitle', 'Compassionate care for your entire family')}
-        backgroundImage="/images/hero/dentist-2589771.jpg"
-        minHeight="50vh"
-        className="bg-blue-900/90"
-      />
-      <main className="pt-12">
+        title={'About Our Practice'}
+        subtitle={'Compassionate care for your entire family'}
+        backgroundImage="/images/about-hero.jpg"
+        showButton={true}
+        buttonText={'Book an Appointment'}
+        buttonLink="/booking"
+        className="relative"
+      >
+        <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 to-blue-900/50" />
+      </HeroSection>
+      <main className="relative z-10 pt-12" ref={aboutRef}>
         {/* Quick Links Section */}
-        <section className="bg-blue-50 py-8">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-blue-900">Popular Services</h2>
-              <p className="text-gray-600 mt-2">Quick access to our most sought-after dental services</p>
+        <section className="bg-gradient-to-r from-blue-50 to-cyan-50 py-12 relative overflow-hidden">
+          <div className="absolute inset-0 bg-grid-blue-100/40 [mask-image:linear-gradient(0deg,#fff,transparent)]" />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div className="text-center mb-10">
+              <h2 className="section-heading text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+                Popular Services
+              </h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                Quick access to our most sought-after dental services
+              </p>
             </div>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-3">
               {[
                 { name: 'Dental Implants', path: '/services/dental-implants' },
                 { name: 'Teeth Whitening', path: '/services/cosmetic-dentistry' },
@@ -149,9 +332,7 @@ const About = () => {
                 <button
                   key={service.name}
                   onClick={() => navigate(service.path)}
-                  className="px-4 py-2 bg-white text-blue-700 rounded-full border border-blue-200 hover:bg-blue-50 hover:border-blue-300 transition-all duration-200 text-sm font-medium shadow-sm"
-                  data-aos="fade-up"
-                  data-aos-delay={index * 50}
+                  className="quick-link px-5 py-2.5 bg-white/90 backdrop-blur-sm text-blue-700 rounded-full border border-blue-200 hover:border-blue-300 transition-all duration-300 text-sm font-medium shadow-sm hover:shadow-md hover:-translate-y-0.5 hover:bg-white"
                 >
                   {service.name}
                 </button>
@@ -160,85 +341,109 @@ const About = () => {
           </div>
         </section>
 
-        {/* Category 1: Why Choose Us */}
-        <section className="py-20 bg-gradient-to-b from-blue-50 to-white overflow-hidden">
-          <div className="max-w-6xl mx-auto px-4">
+        {/* Why Choose Us Section */}
+        <section className="py-20 bg-white relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]" />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             {/* Image above Why Choose Us */}
-            <div className="mb-16 rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl">
+            <div className="mb-20 rounded-3xl overflow-hidden shadow-2xl transform transition-all duration-700 hover:shadow-2xl img-reveal">
               <img 
                 src="/images/about-features/Why Choose Us.jpg" 
                 alt="Why Choose Our Dental Clinic" 
                 className="w-full h-auto object-cover"
-                data-aos="fade-up"
-                data-aos-duration="800"
+                loading="lazy"
               />
             </div>
             
-            <h2 
-              className="text-4xl font-bold text-center text-gray-900 mb-12"
-              data-aos="fade-up"
-              data-aos-delay="100"
-            >
-              Why Choose Us?
-            </h2>
+            <div className="text-center mb-16">
+              <span className="inline-block px-4 py-1.5 text-sm font-medium bg-blue-100 text-blue-700 rounded-full mb-4">
+                Our Commitment
+              </span>
+              <h2 className="section-heading text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                Why Choose Us?
+              </h2>
+              <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto mt-6 rounded-full" />
+            </div>
             
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-3 gap-8 features-grid">
               {[
                 {
-                  title: "State-of-the-Art Equipment",
-                  description: "We use state-of-the-art equipment and modern techniques to offer painless, precise, and effective treatments.",
-                  icon: "⚙️"
+                  title: 'State-of-the-Art Equipment',
+                  description: 'We use state-of-the-art equipment and modern techniques to offer painless, precise, and effective treatments.',
+                  icon: '⚙️'
                 },
                 {
-                  title: "Personalized Treatment Plans",
-                  description: "Every smile is unique, and so is our approach. We customize treatments to meet your individual dental needs.",
-                  icon: "🎯"
+                  title: 'Personalized Treatment Plans',
+                  description: 'Every smile is unique, and so is our approach. We customize treatments to meet your individual dental needs.',
+                  icon: '🎯'
                 },
                 {
-                  title: "Comfort & Care",
-                  description: "Your comfort is our priority. Our clinic is designed to create a soothing, stress-free dental experience.",
-                  icon: "💆"
+                  title: 'Comfort & Care',
+                  description: 'Your comfort is our priority. Our clinic is designed to create a soothing, stress-free dental experience.',
+                  icon: '💆'
                 }
-              ].map((feature, index) => (
+              ].map((feature: FeatureCardProps) => (
                 <div 
                   key={feature.title}
-                  className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 feature-card"
-                  data-aos="fade-up"
-                  data-aos-delay={200 + (index * 100)}
+                  className="feature-card bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 overflow-hidden group"
                 >
-                  <div className="text-4xl mb-4">{feature.icon}</div>
-                  <h4 className="text-xl font-bold text-blue-600 mb-3">{feature.title}</h4>
-                  <p className="text-gray-700">{feature.description}</p>
+                  <div className="relative z-10">
+                    <div className="text-5xl mb-6 transform transition-transform duration-500 group-hover:scale-110 group-hover:text-blue-600">
+                      {feature.icon}
+                    </div>
+                    <h4 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                      {feature.title}
+                    </h4>
+                    <p className="text-gray-600 leading-relaxed">
+                      {feature.description}
+                    </p>
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
               ))}
             </div>
             
             {/* Stats Section */}
-            <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6" data-aos="fade-up">
+            <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 stats-grid">
               {[
-                { number: "5000+", label: "Happy Patients" },
-                { number: "15+", label: "Years Experience" },
-                { number: "98%", label: "Success Rate" },
-                { number: "24/7", label: "Emergency Care" }
-              ].map((stat, index) => (
+                { number: '5000', label: 'Happy Patients' },
+                { number: '15', label: 'Years Experience' },
+                { number: '98', label: 'Success Rate', suffix: '%' },
+                { number: '24/7', label: 'Emergency Care' }
+              ].map((stat: StatItemProps) => (
                 <div 
                   key={stat.label}
-                  className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow"
-                  data-aos="fade-up"
-                  data-aos-delay={300 + (index * 100)}
+                  className="stat-item text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 overflow-hidden group"
                 >
-                  <div className="text-3xl font-bold text-blue-600 mb-2">{stat.number}</div>
-                  <div className="text-gray-600 font-medium">{stat.label}</div>
+                  <div className="relative z-10">
+                    <div className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 mb-3 stat-number" data-suffix={stat.suffix || ''}>
+                      {stat.number}
+                    </div>
+                    <div className="text-gray-600 font-medium text-sm uppercase tracking-wider">
+                      {stat.label}
+                    </div>
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Category 2: Key Features Section (from screenshot) */}
-        <section className="py-20 bg-white">
+        {/* Key Features Section */}
+        <section className="py-20 bg-gray-50">
           <div className="max-w-6xl mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center mb-12">
+            <div className="text-center mb-16">
+              <span className="inline-block px-4 py-1.5 text-sm font-medium bg-blue-100 text-blue-700 rounded-full mb-4">
+                Our Services
+              </span>
+              <h2 className="section-heading text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                Comprehensive Dental Care
+              </h2>
+              <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto mt-6 rounded-full" />
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
               {[
                 {
                   img: "/images/about-features/Dental Checkup.png",
@@ -258,15 +463,25 @@ const About = () => {
               ].map((item, idx) => (
                 <div
                   key={item.title}
-                  className="relative rounded-2xl shadow-lg p-6 h-[340px] flex flex-col justify-end items-center overflow-hidden transition-all duration-700 grayscale hover:grayscale-0"
-                  data-aos={idx === 0 ? "zoom-in-up" : idx === 1 ? "flip-left" : "zoom-in-down"}
-                  data-aos-delay={idx * 100}
+                  className="feature-card bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 overflow-hidden group"
                 >
-                  <img src={item.img} alt={item.title} className="animate-img absolute inset-0 w-full h-full object-cover opacity-40 transition-all duration-700" />
-                  <div className="relative z-10 flex flex-col items-center">
-                    <h3 className="text-xl font-extrabold text-gray-900 mb-2 bg-white/80 px-3 py-1 rounded">{item.title}</h3>
-                    <p className="text-base text-gray-800 font-medium mt-2 bg-white/70 px-3 py-2 rounded">{item.desc}</p>
+                  <div className="relative z-10">
+                    <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors duration-500">
+                      <img 
+                        src={item.img} 
+                        alt={item.title} 
+                        className="w-16 h-16 object-contain transition-all duration-500 group-hover:scale-110"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      {item.desc}
+                    </p>
                   </div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
               ))}
             </div>
