@@ -10,7 +10,7 @@ export const ContactSection = () => {
     {
       icon: Phone,
       title: "Call Us",
-      details: ["+91 94944 44027", "Emergency: +91 94944 44027"],
+      details: ["+91 99661 51626", "Emergency: +91 84999 95552"],
       color: "from-green-500 to-emerald-500"
     },
     {
@@ -67,7 +67,7 @@ export const ContactSection = () => {
             ))}
 
             {/* WhatsApp Card */}
-            <a href="https://wa.me/919494444027" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/919966151626" target="_blank" rel="noopener noreferrer">
               <Card className="bg-gradient-to-r from-green-500 to-emerald-500 text-white cursor-pointer hover:scale-105 transition-all duration-300">
                 <CardContent className="p-6">
                   <div className="flex items-center space-x-4">

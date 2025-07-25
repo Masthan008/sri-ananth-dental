@@ -358,9 +358,15 @@ const About = () => {
               <div className="relative rounded-3xl overflow-hidden shadow-xl min-h-[350px] flex flex-col justify-end" data-aos="fade-up" data-aos-delay="0">
                 <div className="absolute inset-0">
                   <img 
-                    src="/images/our-mission.jpg" 
+                    src="/images/about-features/mission.png" 
                     alt="Our Mission" 
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      // Fallback to a solid color if image fails to load
+                      const target = e.target as HTMLImageElement;
+                      target.onerror = null;
+                      target.src = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%231e40af%22%2F%3E%3C%2Fsvg%3E';
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/70"></div>
                 </div>
@@ -376,9 +382,15 @@ const About = () => {
               <div className="relative rounded-3xl overflow-hidden shadow-xl min-h-[350px] flex flex-col justify-end" data-aos="fade-up" data-aos-delay="100">
                 <div className="absolute inset-0">
                   <img 
-                    src="/images/our-vision.jpg" 
+                    src="/images/about-features/vision.png" 
                     alt="Our Vision" 
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      // Fallback to a solid color if image fails to load
+                      const target = e.target as HTMLImageElement;
+                      target.onerror = null;
+                      target.src = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%231e40af%22%2F%3E%3C%2Fsvg%3E';
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/70"></div>
                 </div>

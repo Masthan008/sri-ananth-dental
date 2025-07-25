@@ -2,25 +2,26 @@ export const doctors = [
   {
     id: 1,
     name: "Dr. Gireesha Reddy",
-    title: "BDS, MDS [MBBS]",
+    title: "Oral and Maxillofacial Surgeon",
     image: "/images/doctors/dr-gireesha-reddy.jpg",
-    specialties: ["General Dentistry", "Cosmetic Dentistry", "Dental Implants"],
+    specialties: ["Oral Surgery", "Maxillofacial Surgery", "Dental Implants"],
     experience: "10+ years",
-    education: "BDS, MDS [MBBS]",
+    education: "BDS, MDS - Oral & Maxillofacial Surgery",
     qualifications: [
       "Bachelor of Dental Surgery (BDS)",
-      "Masters in Dental Surgery (MDS)",
-      "Advanced Certification in Cosmetic Dentistry",
+      "Masters in Dental Surgery - Oral & Maxillofacial Surgery (MDS)",
+      "Advanced Certification in Maxillofacial Surgery",
       "Member of Indian Dental Association"
     ],
     rating: 4.9,
     reviews: 156,
     availability: "Mon-Sat: 9:00 AM - 8:00 PM",
-    bio: "Dr. Gireesha Reddy is a highly skilled and compassionate dentist with extensive experience in general and cosmetic dentistry. She is dedicated to providing personalized care and creating beautiful, healthy smiles for all her patients.",
+    bio: "Dr. Gireesha Reddy is a highly skilled Oral and Maxillofacial Surgeon with extensive experience in complex dental and facial procedures. As the Managing Director, she is dedicated to providing exceptional surgical care and creating beautiful, healthy smiles for all her patients.",
     achievements: [
-      "Masters in Dental Surgery", 
+      "Masters in Dental Surgery - Oral & Maxillofacial Surgery", 
       "Member of Indian Dental Association", 
-      "Advanced Training in Cosmetic Dentistry"
+      "Advanced Training in Maxillofacial Surgery",
+      "Managing Director - Sri Ananth Dental Hospital"
     ]
   },
   {
